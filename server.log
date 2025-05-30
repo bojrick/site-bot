@@ -1,0 +1,2817 @@
+nohup: ignoring input
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+> site-bot@1.0.0 dev
+> ts-node src/index.ts
+
+🔧 WhatsApp Service initialized:
+📱 Phone Number ID: 683782988142735
+🔐 Token exists: true
+🔐 Token length: 239
+🔐 Token first 20 chars: EAAXbuPuiqWsBO6dZCtC...
+✅ Database connection successful
+🚀 Server running on port 3010
+📱 WhatsApp webhook endpoint: http://localhost:3010/webhook
+🔍 Health check: http://localhost:3010/health
+2025-05-30T06:34:08.395Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:10.493Z - POST /webhook
+📨 Received message from +19088483575: {
+  type: 'text',
+  id: 'wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQTNGQTQyRkVGMDhCOEIwODc1MwA=',
+  timestamp: '1748586849'
+}
+Message content: {
+  "from": "19088483575",
+  "id": "wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQTNGQTQyRkVGMDhCOEIwODc1MwA=",
+  "timestamp": "1748586849",
+  "text": {
+    "body": "Hi"
+  },
+  "type": "text"
+}
+👤 User: customer, Phone: +19088483575
+💬 Message: "Hi"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "interactive",
+  "interactive": {
+    "type": "button",
+    "body": {
+      "text": "🏗️ Welcome to our Site Management Service!\n\nHow can I help you today?"
+    },
+    "action": {
+      "buttons": [
+        {
+          "type": "reply",
+          "reply": {
+            "id": "book_visit",
+            "title": "📅 Book Site Visit"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "check_availability",
+            "title": "🕐 Check Availability"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "pricing",
+            "title": "💰 Pricing & Plans"
+          }
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBIwMTU1REQ2MjJCNkFFNzdBNDYA'
+    }
+  ]
+}
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Or choose from more options:"
+    },
+    "action": {
+      "button": "Select Option",
+      "sections": [
+        {
+          "title": "Services",
+          "rows": [
+            {
+              "id": "talk_to_sales",
+              "title": "📞 Talk to Sales",
+              "description": "Connect with our sales team"
+            },
+            {
+              "id": "help",
+              "title": "❓ Help",
+              "description": "Get help and support"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+2025-05-30T06:34:13.686Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:14.071Z - POST /webhook
+📭 No messages in webhook payload
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBI4NUM0ODYxODVFQkMwODFBOUMA'
+    }
+  ]
+}
+2025-05-30T06:34:14.462Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:15.227Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:15.756Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:15.895Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:15.939Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:37.743Z - POST /webhook
+📨 Received message from +19088483575: {
+  type: 'interactive',
+  id: 'wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQURDRDEzOENFMUJEQ0QzMzE3OQA=',
+  timestamp: '1748586876'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgLMTkwODg0ODM1NzUVAgARGBIwMTU1REQ2MjJCNkFFNzdBNDYA"
+  },
+  "from": "19088483575",
+  "id": "wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQURDRDEzOENFMUJEQ0QzMzE3OQA=",
+  "timestamp": "1748586876",
+  "type": "interactive",
+  "interactive": {
+    "type": "button_reply",
+    "button_reply": {
+      "id": "book_visit",
+      "title": "📅 Book Site Visit"
+    }
+  }
+}
+👤 User: customer, Phone: +19088483575
+💬 Message: "book_visit"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "text",
+  "text": {
+    "body": "📅 *Book a Site Visit*\n\nLet's schedule your site visit! \n\nPlease share your full name:"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBI1RjRCRDQ0MEI5NTY4MzAzRTcA'
+    }
+  ]
+}
+2025-05-30T06:34:40.430Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:41.149Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:41.196Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:41.287Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:51.366Z - POST /webhook
+📨 Received message from +19088483575: {
+  type: 'text',
+  id: 'wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQUI3NDIwMDc5MEY4Q0JFRjg3QQA=',
+  timestamp: '1748586890'
+}
+Message content: {
+  "from": "19088483575",
+  "id": "wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQUI3NDIwMDc5MEY4Q0JFRjg3QQA=",
+  "timestamp": "1748586890",
+  "text": {
+    "body": "Yash Patel"
+  },
+  "type": "text"
+}
+👤 User: customer, Phone: +19088483575
+💬 Message: "Yash Patel"
+🎯 Session: booking, Step: collect_name
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Select your preferred date:"
+    },
+    "action": {
+      "button": "Choose Date",
+      "sections": [
+        {
+          "title": "Available Dates",
+          "rows": [
+            {
+              "id": "2025-05-31",
+              "title": "Sat, 31 May",
+              "description": "Tomorrow"
+            },
+            {
+              "id": "2025-06-01",
+              "title": "Sun, 1 Jun",
+              "description": ""
+            },
+            {
+              "id": "2025-06-02",
+              "title": "Mon, 2 Jun",
+              "description": ""
+            },
+            {
+              "id": "2025-06-03",
+              "title": "Tue, 3 Jun",
+              "description": ""
+            },
+            {
+              "id": "2025-06-04",
+              "title": "Wed, 4 Jun",
+              "description": ""
+            },
+            {
+              "id": "2025-06-05",
+              "title": "Thu, 5 Jun",
+              "description": ""
+            },
+            {
+              "id": "2025-06-06",
+              "title": "Fri, 6 Jun",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBI0NjlEQUVGNkNCMzExOUY2REIA'
+    }
+  ]
+}
+2025-05-30T06:34:54.282Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:54.778Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:54.825Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:34:54.857Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:01.627Z - POST /webhook
+📨 Received message from +19088483575: {
+  type: 'interactive',
+  id: 'wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQUM3NUY4REMyNEJFODAzMUIxQQA=',
+  timestamp: '1748586900'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgLMTkwODg0ODM1NzUVAgARGBI0NjlEQUVGNkNCMzExOUY2REIA"
+  },
+  "from": "19088483575",
+  "id": "wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQUM3NUY4REMyNEJFODAzMUIxQQA=",
+  "timestamp": "1748586900",
+  "type": "interactive",
+  "interactive": {
+    "type": "list_reply",
+    "list_reply": {
+      "id": "2025-05-31",
+      "title": "Sat, 31 May",
+      "description": "Tomorrow"
+    }
+  }
+}
+👤 User: customer, Phone: +19088483575
+💬 Message: "2025-05-31"
+🎯 Session: booking, Step: collect_date
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Select your preferred time:"
+    },
+    "action": {
+      "button": "Choose Time",
+      "sections": [
+        {
+          "title": "Available Time Slots",
+          "rows": [
+            {
+              "id": "09:00",
+              "title": "9:00 AM",
+              "description": "Morning slot"
+            },
+            {
+              "id": "11:00",
+              "title": "11:00 AM",
+              "description": "Late morning"
+            },
+            {
+              "id": "14:00",
+              "title": "2:00 PM",
+              "description": "Afternoon"
+            },
+            {
+              "id": "16:00",
+              "title": "4:00 PM",
+              "description": "Evening"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBJBOUE4Q0QyQ0EzQ0VBRDlEQzgA'
+    }
+  ]
+}
+2025-05-30T06:35:04.226Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:04.698Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:04.802Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:04.819Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:09.105Z - POST /webhook
+📨 Received message from +19088483575: {
+  type: 'interactive',
+  id: 'wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQUM2RjQxMzU2MEFGMkVDNzQ4MQA=',
+  timestamp: '1748586908'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgLMTkwODg0ODM1NzUVAgARGBJBOUE4Q0QyQ0EzQ0VBRDlEQzgA"
+  },
+  "from": "19088483575",
+  "id": "wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQUM2RjQxMzU2MEFGMkVDNzQ4MQA=",
+  "timestamp": "1748586908",
+  "type": "interactive",
+  "interactive": {
+    "type": "list_reply",
+    "list_reply": {
+      "id": "11:00",
+      "title": "11:00 AM",
+      "description": "Late morning"
+    }
+  }
+}
+👤 User: customer, Phone: +19088483575
+💬 Message: "11:00"
+🎯 Session: booking, Step: collect_time
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "text",
+  "text": {
+    "body": "✅ *Booking Confirmed!*\n\n📋 *Details:*\n• Name: Yash Patel\n• Date: Friday 30 May, 2025\n• Time: 11:00 AM\n\n📍 Our team will contact you 1 day before your visit with location details.\n\n*Booking ID:* 4a82e472\n\nType *menu* to go back to main menu."
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBIxQTEwMDc5MUI1RkREQUY2RTUA'
+    }
+  ]
+}
+2025-05-30T06:35:11.641Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:12.215Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:12.221Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:12.294Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:41.971Z - POST /webhook
+📨 Received message from +19088483575: {
+  type: 'interactive',
+  id: 'wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQUNDM0QwMzdERTRDODQ0RUIwMwA=',
+  timestamp: '1748586940'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgLMTkwODg0ODM1NzUVAgARGBIwMTU1REQ2MjJCNkFFNzdBNDYA"
+  },
+  "from": "19088483575",
+  "id": "wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQUNDM0QwMzdERTRDODQ0RUIwMwA=",
+  "timestamp": "1748586940",
+  "type": "interactive",
+  "interactive": {
+    "type": "button_reply",
+    "button_reply": {
+      "id": "pricing",
+      "title": "💰 Pricing & Plans"
+    }
+  }
+}
+👤 User: customer, Phone: +19088483575
+💬 Message: "pricing"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "text",
+  "text": {
+    "body": "💰 *Our Pricing & Plans*\n\n🏠 *Residential Projects:*\n• Studio Apartments: ₹25-35 Lakhs\n• 1 BHK: ₹35-50 Lakhs  \n• 2 BHK: ₹50-75 Lakhs\n• 3 BHK: ₹75 Lakhs+\n\n🏢 *Commercial Projects:*\n• Office Spaces: ₹8,000-12,000/sq ft\n• Retail Spaces: ₹10,000-15,000/sq ft\n\n📋 *What's Included:*\n• Premium location\n• Modern amenities\n• 24/7 security\n• Power backup\n• Parking facilities\n\n*🎯 Special Offers:*\n• Early bird discount: 5%\n• Referral bonus: ₹50,000\n\nWant to know more? Type *talk_to_sales* to connect with our sales team!"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBI5MDlCREQ3QzAyRTEwQzlCMEMA'
+    }
+  ]
+}
+2025-05-30T06:35:45.056Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:45.555Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:45.556Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:35:45.601Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:36:26.534Z - POST /webhook
+📨 Received message from +19088483575: {
+  type: 'interactive',
+  id: 'wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQUJDNEE2QTEyMTIyRkY0MTY1MwA=',
+  timestamp: '1748586985'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgLMTkwODg0ODM1NzUVAgARGBIwMTU1REQ2MjJCNkFFNzdBNDYA"
+  },
+  "from": "19088483575",
+  "id": "wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQUJDNEE2QTEyMTIyRkY0MTY1MwA=",
+  "timestamp": "1748586985",
+  "type": "interactive",
+  "interactive": {
+    "type": "button_reply",
+    "button_reply": {
+      "id": "check_availability",
+      "title": "🕐 Check Availability"
+    }
+  }
+}
+👤 User: customer, Phone: +19088483575
+💬 Message: "check_availability"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "text",
+  "text": {
+    "body": "📅 *Site Visit Availability*\n\n*This Week:*\n• Monday - Friday: 9:00 AM - 5:00 PM\n• Saturday: 10:00 AM - 4:00 PM\n• Sunday: Closed\n\n*Next Available Slots:*\n• Tomorrow: 11:00 AM, 2:00 PM, 4:00 PM\n• Day after: 9:00 AM, 11:00 AM, 2:00 PM\n\nEach visit takes approximately 1-2 hours.\n\nWould you like to book a slot? Type *book* to start booking process."
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBJBODE5MjVDNDc0QTFBMEQ5RDUA'
+    }
+  ]
+}
+2025-05-30T06:36:29.454Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:36:29.889Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:36:29.998Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T06:36:30.206Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:36:14.688Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQzFFRDNENDFDRjE3NjVCNDkxRjRBQjIyODcwMzA2QkYA',
+  timestamp: '1748590572'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQzFFRDNENDFDRjE3NjVCNDkxRjRBQjIyODcwMzA2QkYA",
+  "timestamp": "1748590572",
+  "text": {
+    "body": "Hi"
+  },
+  "type": "text"
+}
+✅ Created new customer: +917383489516
+👤 User: customer, Phone: +917383489516
+💬 Message: "Hi"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "button",
+    "body": {
+      "text": "🏗️ Welcome to our Site Management Service!\n\nHow can I help you today?"
+    },
+    "action": {
+      "buttons": [
+        {
+          "type": "reply",
+          "reply": {
+            "id": "book_visit",
+            "title": "📅 Book Site Visit"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "check_availability",
+            "title": "🕐 Check Availability"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "pricing",
+            "title": "💰 Pricing & Plans"
+          }
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSNEZBNEVGMUU1RDRCMEY2NDg4AA=='
+    }
+  ]
+}
+2025-05-30T07:36:17.948Z - POST /webhook
+📭 No messages in webhook payload
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Or choose from more options:"
+    },
+    "action": {
+      "button": "Select Option",
+      "sections": [
+        {
+          "title": "Services",
+          "rows": [
+            {
+              "id": "talk_to_sales",
+              "title": "📞 Talk to Sales",
+              "description": "Connect with our sales team"
+            },
+            {
+              "id": "help",
+              "title": "❓ Help",
+              "description": "Get help and support"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+2025-05-30T07:36:18.782Z - POST /webhook
+📭 No messages in webhook payload
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSRjlGM0E0QTg5MTRGNDE2NDdBAA=='
+    }
+  ]
+}
+2025-05-30T07:36:19.708Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:36:20.009Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:36:20.394Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:36:58.356Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggMjVEM0I2NEI5MjVFQTEwNDU4OUJGOEExRjA4QkU4OEEA',
+  timestamp: '1748590617'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggMjVEM0I2NEI5MjVFQTEwNDU4OUJGOEExRjA4QkU4OEEA",
+  "timestamp": "1748590617",
+  "text": {
+    "body": "Hi"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "Hi"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "🔐 Your verification code is: 554548\n\nThis code will expire in 10 minutes. Please enter this code to verify your employee account."
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQzc5OEI4NjVEQ0I4OUU3MkEwAA=='
+    }
+  ]
+}
+📲 OTP sent to +917383489516
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "👋 Welcome to the Employee Portal!\n\n🔐 For security, please verify your account. I've sent you a 6-digit verification code.\n\nPlease enter the code to continue:"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSMkZGNThGMjQ4NkI3ODJENzJGAA=='
+    }
+  ]
+}
+2025-05-30T07:37:01.365Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:01.719Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:02.101Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:02.107Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:02.501Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:02.503Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:15.615Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNDk3RkZCMTY2OTA3ODY2MzhBM0Y2QjJDMjcyM0FBNjAA',
+  timestamp: '1748590634'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNDk3RkZCMTY2OTA3ODY2MzhBM0Y2QjJDMjcyM0FBNjAA",
+  "timestamp": "1748590634",
+  "text": {
+    "body": "554548"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "554548"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "Successfully verified! Welcome to the employee portal."
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSREQ5NzgzN0M3NEZDQ0I1QTY3AA=='
+    }
+  ]
+}
+2025-05-30T07:37:18.444Z - POST /webhook
+📭 No messages in webhook payload
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "🎉 *Welcome to Employee Portal!*\n\nYou're now verified and ready to use our employee services.\n\nWhat would you like to do today?"
+  }
+}
+2025-05-30T07:37:18.684Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:18.756Z - POST /webhook
+📭 No messages in webhook payload
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQzkxREY3ODBENDhBRDVFOTczAA=='
+    }
+  ]
+}
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "button",
+    "body": {
+      "text": "👷‍♂️ *Employee Portal*\n\nHow can I help you today?"
+    },
+    "action": {
+      "buttons": [
+        {
+          "type": "reply",
+          "reply": {
+            "id": "log_activity",
+            "title": "📝 Log Activity"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "request_materials",
+            "title": "📦 Request Materials"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "view_dashboard",
+            "title": "📊 View Dashboard"
+          }
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSNzc1MjA4Njc2MkVDNjJGMjNDAA=='
+    }
+  ]
+}
+2025-05-30T07:37:20.228Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:20.505Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:20.694Z - POST /webhook
+📭 No messages in webhook payload
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Additional options:"
+    },
+    "action": {
+      "button": "More Options",
+      "sections": [
+        {
+          "title": "Support",
+          "rows": [
+            {
+              "id": "help",
+              "title": "❓ Help",
+              "description": "Get help and support"
+            },
+            {
+              "id": "contact_admin",
+              "title": "📞 Contact Admin",
+              "description": "Reach out to administration"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+2025-05-30T07:37:21.115Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:21.225Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:21.276Z - POST /webhook
+📭 No messages in webhook payload
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSMzBGRjQ4NURGNDE2RjAwQjY4AA=='
+    }
+  ]
+}
+2025-05-30T07:37:22.780Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:22.974Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:23.196Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:23.289Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggRjJFNTg2QzgyQTlBNzNCRUMwRTA4MENGQTNCRkFCODcA',
+  timestamp: '1748590642'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSNzc1MjA4Njc2MkVDNjJGMjNDAA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggRjJFNTg2QzgyQTlBNzNCRUMwRTA4MENGQTNCRkFCODcA",
+  "timestamp": "1748590642",
+  "type": "interactive",
+  "interactive": {
+    "type": "button_reply",
+    "button_reply": {
+      "id": "log_activity",
+      "title": "📝 Log Activity"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "log_activity"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Select the site where you worked:"
+    },
+    "action": {
+      "button": "Choose Site",
+      "sections": [
+        {
+          "title": "Active Sites",
+          "rows": [
+            {
+              "id": "site_1",
+              "title": "🏗️ Site A - Residential",
+              "description": "Main residential project"
+            },
+            {
+              "id": "site_2",
+              "title": "🏢 Site B - Commercial",
+              "description": "Office complex project"
+            },
+            {
+              "id": "site_3",
+              "title": "🏬 Site C - Retail",
+              "description": "Shopping center project"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQkE4OEZBRjEzRUE4MTcxMUVDAA=='
+    }
+  ]
+}
+2025-05-30T07:37:25.956Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:26.009Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:26.099Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:30.736Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggRkRCMDUyRkEyNjQ3NUEzMjBGNzM2OEIwNDg5MTQ2QkQA',
+  timestamp: '1748590649'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQkE4OEZBRjEzRUE4MTcxMUVDAA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggRkRCMDUyRkEyNjQ3NUEzMjBGNzM2OEIwNDg5MTQ2QkQA",
+  "timestamp": "1748590649",
+  "type": "interactive",
+  "interactive": {
+    "type": "list_reply",
+    "list_reply": {
+      "id": "site_1",
+      "title": "🏗️ Site A - Residential",
+      "description": "Main residential project"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "site_1"
+🎯 Session: log_activity, Step: select_site
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "What type of activity did you perform?"
+    },
+    "action": {
+      "button": "Select Activity",
+      "sections": [
+        {
+          "title": "Activity Types",
+          "rows": [
+            {
+              "id": "construction",
+              "title": "🔨 Construction Work",
+              "description": "Building and construction tasks"
+            },
+            {
+              "id": "inspection",
+              "title": "🔍 Inspection",
+              "description": "Quality checks and inspections"
+            },
+            {
+              "id": "maintenance",
+              "title": "🔧 Maintenance",
+              "description": "Equipment and site maintenance"
+            },
+            {
+              "id": "planning",
+              "title": "📋 Planning",
+              "description": "Project planning and coordination"
+            },
+            {
+              "id": "other",
+              "title": "📝 Other",
+              "description": "Other work activities"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSNDUyOTJDNkI5NDVCNTMwNjI3AA=='
+    }
+  ]
+}
+2025-05-30T07:37:33.069Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:33.401Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:33.612Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:38.510Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNkRBOTBGM0EwOEJFRUUyQUQ1OEMxMzlDRTE0QjI5RTUA',
+  timestamp: '1748590657'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSNDUyOTJDNkI5NDVCNTMwNjI3AA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNkRBOTBGM0EwOEJFRUUyQUQ1OEMxMzlDRTE0QjI5RTUA",
+  "timestamp": "1748590657",
+  "type": "interactive",
+  "interactive": {
+    "type": "list_reply",
+    "list_reply": {
+      "id": "construction",
+      "title": "🔨 Construction Work",
+      "description": "Building and construction tasks"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "construction"
+🎯 Session: log_activity, Step: select_activity_type
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "How many hours did you work? (Enter a number):"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSRTQxRkIyQUU3NUUxRDlCOUU2AA=='
+    }
+  ]
+}
+2025-05-30T07:37:40.746Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:40.972Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:41.306Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:45.618Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNzZDMDczMUI5MUQ3Q0FBOEUxMzZENzE5NzVGNEQ5NkQA',
+  timestamp: '1748590664'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNzZDMDczMUI5MUQ3Q0FBOEUxMzZENzE5NzVGNEQ5NkQA",
+  "timestamp": "1748590664",
+  "text": {
+    "body": "1"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "1"
+🎯 Session: log_activity, Step: enter_hours
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "Please describe what you did (optional - type 'skip' to skip):"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQ0JDQ0QxMkIwMUM1NjVBQTBGAA=='
+    }
+  ]
+}
+2025-05-30T07:37:47.973Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:48.238Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:48.465Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:37:57.602Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggODREMTM3ODYxNDNENjlEQ0JGMzZEMUIwREJFNTQxNUEA',
+  timestamp: '1748590676'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggODREMTM3ODYxNDNENjlEQ0JGMzZEMUIwREJFNTQxNUEA",
+  "timestamp": "1748590676",
+  "text": {
+    "body": "Skip"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "Skip"
+🎯 Session: log_activity, Step: enter_description
+Error logging activity: error: invalid input syntax for type uuid: "site_1"
+    at /home/bojrick/reeva-whatsapp-crm-erp/site-bot/node_modules/pg-pool/index.js:45:11
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/bojrick/reeva-whatsapp-crm-erp/site-bot/node_modules/src/node-postgres/session.ts:65:19
+    at async EmployeeFlow.completeActivityLog (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:337:24)
+    at async EmployeeFlow.handleActivityLogging (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:303:9)
+    at async EmployeeFlow.handleFlowStep (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:244:7)
+    at async EmployeeFlow.handleMessage (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:30:7)
+    at async MessageHandler.handleMessage (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/messageHandler.ts:64:9)
+    at async /home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/routes/webhook.ts:61:5 {
+  length: 138,
+  severity: 'ERROR',
+  code: '22P02',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: "unnamed portal parameter $2 = '...'",
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'uuid.c',
+  line: '133',
+  routine: 'string_to_uuid'
+}
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "Sorry, there was an error logging your activity. Please try again."
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSODI0QTc2MTg4M0U3Q0IzNEUxAA=='
+    }
+  ]
+}
+2025-05-30T07:38:00.191Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:00.504Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:00.690Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:05.595Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQ0MwRUU1Qjk5REQzNERFM0VDNkNGMzFBNTg0NUIzNEUA',
+  timestamp: '1748590684'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQ0MwRUU1Qjk5REQzNERFM0VDNkNGMzFBNTg0NUIzNEUA",
+  "timestamp": "1748590684",
+  "text": {
+    "body": "skip"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "skip"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "button",
+    "body": {
+      "text": "👷‍♂️ *Employee Portal*\n\nHow can I help you today?"
+    },
+    "action": {
+      "buttons": [
+        {
+          "type": "reply",
+          "reply": {
+            "id": "log_activity",
+            "title": "📝 Log Activity"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "request_materials",
+            "title": "📦 Request Materials"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "view_dashboard",
+            "title": "📊 View Dashboard"
+          }
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSOEI4RkQxM0UwNzFBRjc5MzE0AA=='
+    }
+  ]
+}
+2025-05-30T07:38:08.177Z - POST /webhook
+📭 No messages in webhook payload
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Additional options:"
+    },
+    "action": {
+      "button": "More Options",
+      "sections": [
+        {
+          "title": "Support",
+          "rows": [
+            {
+              "id": "help",
+              "title": "❓ Help",
+              "description": "Get help and support"
+            },
+            {
+              "id": "contact_admin",
+              "title": "📞 Contact Admin",
+              "description": "Reach out to administration"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+2025-05-30T07:38:08.567Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:08.617Z - POST /webhook
+📭 No messages in webhook payload
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSNTA3OUE0QzQxRkYyM0E0QTJDAA=='
+    }
+  ]
+}
+2025-05-30T07:38:09.999Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:10.503Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:10.510Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:14.802Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNDk5NEFCRDM5OURBMzI2OTQwNjA1OUUxMzc5NEU2N0UA',
+  timestamp: '1748590693'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSOEI4RkQxM0UwNzFBRjc5MzE0AA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNDk5NEFCRDM5OURBMzI2OTQwNjA1OUUxMzc5NEU2N0UA",
+  "timestamp": "1748590693",
+  "type": "interactive",
+  "interactive": {
+    "type": "button_reply",
+    "button_reply": {
+      "id": "log_activity",
+      "title": "📝 Log Activity"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "log_activity"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Select the site where you worked:"
+    },
+    "action": {
+      "button": "Choose Site",
+      "sections": [
+        {
+          "title": "Active Sites",
+          "rows": [
+            {
+              "id": "site_1",
+              "title": "🏗️ Site A - Residential",
+              "description": "Main residential project"
+            },
+            {
+              "id": "site_2",
+              "title": "🏢 Site B - Commercial",
+              "description": "Office complex project"
+            },
+            {
+              "id": "site_3",
+              "title": "🏬 Site C - Retail",
+              "description": "Shopping center project"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSRTMyNDlBOEQ5RkIzM0RDM0ZBAA=='
+    }
+  ]
+}
+2025-05-30T07:38:17.464Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:17.543Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:17.623Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:21.661Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggRjI3MkUzRDFCOUU1RTkzMzUwMkY3MDg5MzFDQ0UwMDEA',
+  timestamp: '1748590700'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSRTMyNDlBOEQ5RkIzM0RDM0ZBAA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggRjI3MkUzRDFCOUU1RTkzMzUwMkY3MDg5MzFDQ0UwMDEA",
+  "timestamp": "1748590700",
+  "type": "interactive",
+  "interactive": {
+    "type": "list_reply",
+    "list_reply": {
+      "id": "site_1",
+      "title": "🏗️ Site A - Residential",
+      "description": "Main residential project"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "site_1"
+🎯 Session: log_activity, Step: select_site
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "What type of activity did you perform?"
+    },
+    "action": {
+      "button": "Select Activity",
+      "sections": [
+        {
+          "title": "Activity Types",
+          "rows": [
+            {
+              "id": "construction",
+              "title": "🔨 Construction Work",
+              "description": "Building and construction tasks"
+            },
+            {
+              "id": "inspection",
+              "title": "🔍 Inspection",
+              "description": "Quality checks and inspections"
+            },
+            {
+              "id": "maintenance",
+              "title": "🔧 Maintenance",
+              "description": "Equipment and site maintenance"
+            },
+            {
+              "id": "planning",
+              "title": "📋 Planning",
+              "description": "Project planning and coordination"
+            },
+            {
+              "id": "other",
+              "title": "📝 Other",
+              "description": "Other work activities"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQzcwMUY4MkZDNTEyRTM4RDlFAA=='
+    }
+  ]
+}
+2025-05-30T07:38:23.886Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:24.233Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:24.734Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:31.625Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggODNEMjU3NDc5QjM0MTQyQkM3RUU1M0VFQTAxQjQ3NDgA',
+  timestamp: '1748590710'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQzcwMUY4MkZDNTEyRTM4RDlFAA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggODNEMjU3NDc5QjM0MTQyQkM3RUU1M0VFQTAxQjQ3NDgA",
+  "timestamp": "1748590710",
+  "type": "interactive",
+  "interactive": {
+    "type": "list_reply",
+    "list_reply": {
+      "id": "construction",
+      "title": "🔨 Construction Work",
+      "description": "Building and construction tasks"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "construction"
+🎯 Session: log_activity, Step: select_activity_type
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "How many hours did you work? (Enter a number):"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSRDJCMDMwNEI0NEFDRTc1OUJFAA=='
+    }
+  ]
+}
+2025-05-30T07:38:34.172Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:34.374Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:34.799Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:38.048Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNEFFNjAzOUJCQkEwNjhCNTEyNUI0QUY2QTBFMjQ4ODgA',
+  timestamp: '1748590717'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNEFFNjAzOUJCQkEwNjhCNTEyNUI0QUY2QTBFMjQ4ODgA",
+  "timestamp": "1748590717",
+  "text": {
+    "body": "1"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "1"
+🎯 Session: log_activity, Step: enter_hours
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "Please describe what you did (optional - type 'skip' to skip):"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSMjYzNEI5ODE0QjcyM0Y2M0YzAA=='
+    }
+  ]
+}
+2025-05-30T07:38:40.403Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:40.710Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:38:41.137Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:05.473Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQzQ3NTVBOUZDMDBCOTlDOEFCNkY2MDJERkM0NzI4MEIA',
+  timestamp: '1748591644'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQzQ3NTVBOUZDMDBCOTlDOEFCNkY2MDJERkM0NzI4MEIA",
+  "timestamp": "1748591644",
+  "text": {
+    "body": "Hi"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "Hi"
+🎯 Session: log_activity, Step: enter_description
+Error logging activity: error: invalid input syntax for type uuid: "site_1"
+    at /home/bojrick/reeva-whatsapp-crm-erp/site-bot/node_modules/pg-pool/index.js:45:11
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/bojrick/reeva-whatsapp-crm-erp/site-bot/node_modules/src/node-postgres/session.ts:65:19
+    at async EmployeeFlow.completeActivityLog (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:337:24)
+    at async EmployeeFlow.handleActivityLogging (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:303:9)
+    at async EmployeeFlow.handleFlowStep (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:244:7)
+    at async EmployeeFlow.handleMessage (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:30:7)
+    at async MessageHandler.handleMessage (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/messageHandler.ts:64:9)
+    at async /home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/routes/webhook.ts:61:5 {
+  length: 138,
+  severity: 'ERROR',
+  code: '22P02',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: "unnamed portal parameter $2 = '...'",
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'uuid.c',
+  line: '133',
+  routine: 'string_to_uuid'
+}
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "Sorry, there was an error logging your activity. Please try again."
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQUZFNUEyMEZDM0E2MjZDRTFEAA=='
+    }
+  ]
+}
+2025-05-30T07:54:08.346Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:08.484Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:08.594Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:22.821Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggN0JCMUFBNURBNTI5OEFCQzlCRkE4OTI4NzQ3OTk2RkMA',
+  timestamp: '1748591661'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggN0JCMUFBNURBNTI5OEFCQzlCRkE4OTI4NzQ3OTk2RkMA",
+  "timestamp": "1748591661",
+  "text": {
+    "body": "Hi"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "Hi"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "button",
+    "body": {
+      "text": "👷‍♂️ *Employee Portal*\n\nHow can I help you today?"
+    },
+    "action": {
+      "buttons": [
+        {
+          "type": "reply",
+          "reply": {
+            "id": "log_activity",
+            "title": "📝 Log Activity"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "request_materials",
+            "title": "📦 Request Materials"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "view_dashboard",
+            "title": "📊 View Dashboard"
+          }
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSOTZDRTlGRUExMjFEMUQxNjNCAA=='
+    }
+  ]
+}
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Additional options:"
+    },
+    "action": {
+      "button": "More Options",
+      "sections": [
+        {
+          "title": "Support",
+          "rows": [
+            {
+              "id": "help",
+              "title": "❓ Help",
+              "description": "Get help and support"
+            },
+            {
+              "id": "contact_admin",
+              "title": "📞 Contact Admin",
+              "description": "Reach out to administration"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+2025-05-30T07:54:25.637Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:25.739Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:25.739Z - POST /webhook
+📭 No messages in webhook payload
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSRjdCRjNDQUQ1MjI2OTFFQkZBAA=='
+    }
+  ]
+}
+2025-05-30T07:54:27.285Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:27.364Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:27.700Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:34.459Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggODg2NjY5RUNEM0JFQTI5NDdENkM0QTNFMkE3OTJCODQA',
+  timestamp: '1748591673'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSOTZDRTlGRUExMjFEMUQxNjNCAA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggODg2NjY5RUNEM0JFQTI5NDdENkM0QTNFMkE3OTJCODQA",
+  "timestamp": "1748591673",
+  "type": "interactive",
+  "interactive": {
+    "type": "button_reply",
+    "button_reply": {
+      "id": "log_activity",
+      "title": "📝 Log Activity"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "log_activity"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Select the site where you worked:"
+    },
+    "action": {
+      "button": "Choose Site",
+      "sections": [
+        {
+          "title": "Active Sites",
+          "rows": [
+            {
+              "id": "site_1",
+              "title": "🏗️ Site A - Residential",
+              "description": "Main residential project"
+            },
+            {
+              "id": "site_2",
+              "title": "🏢 Site B - Commercial",
+              "description": "Office complex project"
+            },
+            {
+              "id": "site_3",
+              "title": "🏬 Site C - Retail",
+              "description": "Shopping center project"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSOUVCRUNEMjM2QjlCRUIxNjM4AA=='
+    }
+  ]
+}
+2025-05-30T07:54:37.529Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:37.645Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:37.802Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:43.568Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQTAzNzRGNDI5OTJDOTI0MTZEMjlGNDBEQUQ4Q0M4QTIA',
+  timestamp: '1748591682'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSOUVCRUNEMjM2QjlCRUIxNjM4AA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQTAzNzRGNDI5OTJDOTI0MTZEMjlGNDBEQUQ4Q0M4QTIA",
+  "timestamp": "1748591682",
+  "type": "interactive",
+  "interactive": {
+    "type": "list_reply",
+    "list_reply": {
+      "id": "site_1",
+      "title": "🏗️ Site A - Residential",
+      "description": "Main residential project"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "site_1"
+🎯 Session: log_activity, Step: select_site
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "What type of activity did you perform?"
+    },
+    "action": {
+      "button": "Select Activity",
+      "sections": [
+        {
+          "title": "Activity Types",
+          "rows": [
+            {
+              "id": "construction",
+              "title": "🔨 Construction Work",
+              "description": "Building and construction tasks"
+            },
+            {
+              "id": "inspection",
+              "title": "🔍 Inspection",
+              "description": "Quality checks and inspections"
+            },
+            {
+              "id": "maintenance",
+              "title": "🔧 Maintenance",
+              "description": "Equipment and site maintenance"
+            },
+            {
+              "id": "planning",
+              "title": "📋 Planning",
+              "description": "Project planning and coordination"
+            },
+            {
+              "id": "other",
+              "title": "📝 Other",
+              "description": "Other work activities"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQTFEQ0MzNTY5MDkzQThCREJEAA=='
+    }
+  ]
+}
+2025-05-30T07:54:45.800Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:46.066Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:46.644Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:56.374Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggOUVCRjQ2OEQwQzlEQjg4NEIwMzBGQUREQzI3OUZFOUUA',
+  timestamp: '1748591695'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQTFEQ0MzNTY5MDkzQThCREJEAA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggOUVCRjQ2OEQwQzlEQjg4NEIwMzBGQUREQzI3OUZFOUUA",
+  "timestamp": "1748591695",
+  "type": "interactive",
+  "interactive": {
+    "type": "list_reply",
+    "list_reply": {
+      "id": "inspection",
+      "title": "🔍 Inspection",
+      "description": "Quality checks and inspections"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "inspection"
+🎯 Session: log_activity, Step: select_activity_type
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "How many hours did you work? (Enter a number):"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSNDVDQTE3M0Q3RDY2QzMyODVEAA=='
+    }
+  ]
+}
+2025-05-30T07:54:59.005Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:59.485Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:54:59.539Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:55:03.350Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggODdDQkRGRUJGQUEwNDBEQ0UyODdCNUU4MkYyRTFCODgA',
+  timestamp: '1748591702'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggODdDQkRGRUJGQUEwNDBEQ0UyODdCNUU4MkYyRTFCODgA",
+  "timestamp": "1748591702",
+  "text": {
+    "body": "2"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "2"
+🎯 Session: log_activity, Step: enter_hours
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "Please describe what you did (optional - type 'skip' to skip):"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSRjk4NUQ0NDJERkE2M0E3OURCAA=='
+    }
+  ]
+}
+2025-05-30T07:55:05.538Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:55:05.884Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:55:06.049Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:55:11.263Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNUNCMjRENzBEM0Q0RkVFMEY2RDhFQjlDODVBQ0E5MkQA',
+  timestamp: '1748591710'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggNUNCMjRENzBEM0Q0RkVFMEY2RDhFQjlDODVBQ0E5MkQA",
+  "timestamp": "1748591710",
+  "text": {
+    "body": "Test"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "Test"
+🎯 Session: log_activity, Step: enter_description
+Error logging activity: error: invalid input syntax for type uuid: "site_1"
+    at /home/bojrick/reeva-whatsapp-crm-erp/site-bot/node_modules/pg-pool/index.js:45:11
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/bojrick/reeva-whatsapp-crm-erp/site-bot/node_modules/src/node-postgres/session.ts:65:19
+    at async EmployeeFlow.completeActivityLog (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:337:24)
+    at async EmployeeFlow.handleActivityLogging (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:303:9)
+    at async EmployeeFlow.handleFlowStep (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:244:7)
+    at async EmployeeFlow.handleMessage (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:30:7)
+    at async MessageHandler.handleMessage (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/messageHandler.ts:64:9)
+    at async /home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/routes/webhook.ts:61:5 {
+  length: 138,
+  severity: 'ERROR',
+  code: '22P02',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: "unnamed portal parameter $2 = '...'",
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'uuid.c',
+  line: '133',
+  routine: 'string_to_uuid'
+}
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "Sorry, there was an error logging your activity. Please try again."
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSRkYwRkEzOUFGODA5RkY2RjUwAA=='
+    }
+  ]
+}
+2025-05-30T07:55:14.379Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:55:14.391Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:55:14.400Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:56:54.443Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggRENBN0YzMDdGNkY0NjAwMjA5MEIzNEYwOUZCNEQ2Q0IA',
+  timestamp: '1748591813'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggRENBN0YzMDdGNkY0NjAwMjA5MEIzNEYwOUZCNEQ2Q0IA",
+  "timestamp": "1748591813",
+  "text": {
+    "body": "Hello"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "Hello"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "button",
+    "body": {
+      "text": "👷‍♂️ *Employee Portal*\n\nHow can I help you today?"
+    },
+    "action": {
+      "buttons": [
+        {
+          "type": "reply",
+          "reply": {
+            "id": "log_activity",
+            "title": "📝 Log Activity"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "request_materials",
+            "title": "📦 Request Materials"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "view_dashboard",
+            "title": "📊 View Dashboard"
+          }
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQ0I5M0EyQTUzQ0NGQkJDNTE1AA=='
+    }
+  ]
+}
+2025-05-30T07:56:57.407Z - POST /webhook
+📭 No messages in webhook payload
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Additional options:"
+    },
+    "action": {
+      "button": "More Options",
+      "sections": [
+        {
+          "title": "Support",
+          "rows": [
+            {
+              "id": "help",
+              "title": "❓ Help",
+              "description": "Get help and support"
+            },
+            {
+              "id": "contact_admin",
+              "title": "📞 Contact Admin",
+              "description": "Reach out to administration"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+2025-05-30T07:56:57.618Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:56:57.924Z - POST /webhook
+📭 No messages in webhook payload
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSODdBRTNFQzBDMkM0NjY1NzQxAA=='
+    }
+  ]
+}
+2025-05-30T07:56:58.937Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:56:59.139Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:56:59.388Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:57:03.604Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggODVEMDU3MDE2NUYwMUU0NkM4MjU3ODZFRTJBQkJBN0MA',
+  timestamp: '1748591822'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQ0I5M0EyQTUzQ0NGQkJDNTE1AA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggODVEMDU3MDE2NUYwMUU0NkM4MjU3ODZFRTJBQkJBN0MA",
+  "timestamp": "1748591822",
+  "type": "interactive",
+  "interactive": {
+    "type": "button_reply",
+    "button_reply": {
+      "id": "log_activity",
+      "title": "📝 Log Activity"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "log_activity"
+🎯 Session: none, Step: none
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Select the site where you worked:"
+    },
+    "action": {
+      "button": "Choose Site",
+      "sections": [
+        {
+          "title": "Active Sites",
+          "rows": [
+            {
+              "id": "site_1",
+              "title": "🏗️ Site A - Residential",
+              "description": "Main residential project"
+            },
+            {
+              "id": "site_2",
+              "title": "🏢 Site B - Commercial",
+              "description": "Office complex project"
+            },
+            {
+              "id": "site_3",
+              "title": "🏬 Site C - Retail",
+              "description": "Shopping center project"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSMzg3NjlDQjUxODMxMjMyMUI4AA=='
+    }
+  ]
+}
+2025-05-30T07:57:06.426Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:57:06.629Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T07:57:06.759Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:00:02.253Z - GET /webhook
+🔐 Webhook verification request: { mode: 'subscribe', token: 'qsefthuko' }
+✅ Webhook verified successfully
+2025-05-30T08:00:08.952Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggMTA2RUI0NEJDRUY5NTFBODE4NDU3NUVCRjY1ODk1QjIA',
+  timestamp: '1748592008'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggMTA2RUI0NEJDRUY5NTFBODE4NDU3NUVCRjY1ODk1QjIA",
+  "timestamp": "1748592008",
+  "text": {
+    "body": "Hi"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "Hi"
+🎯 Session: log_activity, Step: select_site
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "Please select a valid site from the list:"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSQzI0NTU1NEYxNUI5NDVCNzU0AA=='
+    }
+  ]
+}
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Select the site where you worked:"
+    },
+    "action": {
+      "button": "Choose Site",
+      "sections": [
+        {
+          "title": "Active Sites",
+          "rows": [
+            {
+              "id": "site_1",
+              "title": "🏗️ Site A - Residential",
+              "description": "Main residential project"
+            },
+            {
+              "id": "site_2",
+              "title": "🏢 Site B - Commercial",
+              "description": "Office complex project"
+            },
+            {
+              "id": "site_3",
+              "title": "🏬 Site C - Retail",
+              "description": "Shopping center project"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+2025-05-30T08:00:11.876Z - POST /webhook
+📭 No messages in webhook payload
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSRDA0MUEzMkQ5RjlFQkEwMzY2AA=='
+    }
+  ]
+}
+2025-05-30T08:00:12.315Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:00:12.503Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:00:13.078Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:00:13.112Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:00:13.223Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:00:16.948Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggMjQyNjdFMTlENjczQ0RCODY1OTA2OEE2OEE1OUIzRDEA',
+  timestamp: '1748592016'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSRDA0MUEzMkQ5RjlFQkEwMzY2AA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggMjQyNjdFMTlENjczQ0RCODY1OTA2OEE2OEE1OUIzRDEA",
+  "timestamp": "1748592016",
+  "type": "interactive",
+  "interactive": {
+    "type": "list_reply",
+    "list_reply": {
+      "id": "site_1",
+      "title": "🏗️ Site A - Residential",
+      "description": "Main residential project"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "site_1"
+🎯 Session: log_activity, Step: select_site
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "What type of activity did you perform?"
+    },
+    "action": {
+      "button": "Select Activity",
+      "sections": [
+        {
+          "title": "Activity Types",
+          "rows": [
+            {
+              "id": "construction",
+              "title": "🔨 Construction Work",
+              "description": "Building and construction tasks"
+            },
+            {
+              "id": "inspection",
+              "title": "🔍 Inspection",
+              "description": "Quality checks and inspections"
+            },
+            {
+              "id": "maintenance",
+              "title": "🔧 Maintenance",
+              "description": "Equipment and site maintenance"
+            },
+            {
+              "id": "planning",
+              "title": "📋 Planning",
+              "description": "Project planning and coordination"
+            },
+            {
+              "id": "other",
+              "title": "📝 Other",
+              "description": "Other work activities"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSMTVGQUY1MkNCODBEMEFBMTYzAA=='
+    }
+  ]
+}
+2025-05-30T08:00:19.458Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:00:19.501Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:00:19.787Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:00:23.452Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'interactive',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggN0RGNjBGRDk0OTZDRDNGMkYxMTlBMEQxMEM1NjYzMzcA',
+  timestamp: '1748592022'
+}
+Message content: {
+  "context": {
+    "from": "15556573937",
+    "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSMTVGQUY1MkNCODBEMEFBMTYzAA=="
+  },
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggN0RGNjBGRDk0OTZDRDNGMkYxMTlBMEQxMEM1NjYzMzcA",
+  "timestamp": "1748592022",
+  "type": "interactive",
+  "interactive": {
+    "type": "list_reply",
+    "list_reply": {
+      "id": "construction",
+      "title": "🔨 Construction Work",
+      "description": "Building and construction tasks"
+    }
+  }
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "construction"
+🎯 Session: log_activity, Step: select_activity_type
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "How many hours did you work? (Enter a number):"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSODg2MDc0REIxNzM0MTM2MTQzAA=='
+    }
+  ]
+}
+2025-05-30T08:00:25.702Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:00:26.002Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:00:26.204Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:01:15.266Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQURCQzg3MTkyNTg0REJGNDkzMTM1QUY0OEMzNTZGOTcA',
+  timestamp: '1748592074'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQURCQzg3MTkyNTg0REJGNDkzMTM1QUY0OEMzNTZGOTcA",
+  "timestamp": "1748592074",
+  "text": {
+    "body": "Hi"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "Hi"
+🎯 Session: log_activity, Step: enter_hours
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "Please enter a valid number of hours (1-24):"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSOEY1MzBBMzI4NDdDNTZEQkRFAA=='
+    }
+  ]
+}
+2025-05-30T08:01:17.926Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:01:18.114Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:01:18.335Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:01:27.383Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggRDE1RjU0NjVGRjlBNjIxOUU0M0RDMDE1OTFCQURDQjQA',
+  timestamp: '1748592086'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggRDE1RjU0NjVGRjlBNjIxOUU0M0RDMDE1OTFCQURDQjQA",
+  "timestamp": "1748592086",
+  "text": {
+    "body": "12"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "12"
+🎯 Session: log_activity, Step: enter_hours
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "Please describe what you did (optional - type 'skip' to skip):"
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSNEVCRTgwQTFDQ0RDMTlENkQ1AA=='
+    }
+  ]
+}
+2025-05-30T08:01:30.253Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:01:30.726Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:01:31.036Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:01:35.737Z - POST /webhook
+📨 Received message from +917383489516: {
+  type: 'text',
+  id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQzdCRTE3NkNFQzMxNzk5NUQ2MEQ3RjIwN0Q1Q0I4NjkA',
+  timestamp: '1748592094'
+}
+Message content: {
+  "from": "917383489516",
+  "id": "wamid.HBgMOTE3MzgzNDg5NTE2FQIAEhggQzdCRTE3NkNFQzMxNzk5NUQ2MEQ3RjIwN0Q1Q0I4NjkA",
+  "timestamp": "1748592094",
+  "text": {
+    "body": "Test"
+  },
+  "type": "text"
+}
+👤 User: employee, Phone: +917383489516
+💬 Message: "Test"
+🎯 Session: log_activity, Step: enter_description
+Error logging activity: error: invalid input syntax for type uuid: "site_1"
+    at /home/bojrick/reeva-whatsapp-crm-erp/site-bot/node_modules/pg-pool/index.js:45:11
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/bojrick/reeva-whatsapp-crm-erp/site-bot/node_modules/src/node-postgres/session.ts:65:19
+    at async EmployeeFlow.completeActivityLog (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:337:24)
+    at async EmployeeFlow.handleActivityLogging (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:303:9)
+    at async EmployeeFlow.handleFlowStep (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:244:7)
+    at async EmployeeFlow.handleMessage (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/flows/employeeFlow.ts:30:7)
+    at async MessageHandler.handleMessage (/home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/services/messageHandler.ts:64:9)
+    at async /home/bojrick/reeva-whatsapp-crm-erp/site-bot/src/routes/webhook.ts:61:5 {
+  length: 138,
+  severity: 'ERROR',
+  code: '22P02',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: "unnamed portal parameter $2 = '...'",
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'uuid.c',
+  line: '133',
+  routine: 'string_to_uuid'
+}
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+917383489516",
+  "type": "text",
+  "text": {
+    "body": "Sorry, there was an error logging your activity. Please try again."
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+917383489516', wa_id: '917383489516' } ],
+  messages: [
+    {
+      id: 'wamid.HBgMOTE3MzgzNDg5NTE2FQIAERgSOTc2MEQ3QTI0RUMxQzZEMDhBAA=='
+    }
+  ]
+}
+2025-05-30T08:01:38.334Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:01:38.604Z - POST /webhook
+📭 No messages in webhook payload
+2025-05-30T08:01:38.787Z - POST /webhook
+📭 No messages in webhook payload
+Terminated
