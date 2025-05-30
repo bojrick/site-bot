@@ -2815,3 +2815,1213 @@ Error logging activity: error: invalid input syntax for type uuid: "site_1"
 2025-05-30T08:01:38.787Z - POST /webhook
 📭 No messages in webhook payload
 Terminated
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+node:internal/modules/cjs/loader:1219
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'semver'
+Require stack:
+- /usr/share/nodejs/npm/lib/utils/unsupported.js
+- /usr/share/nodejs/npm/lib/cli.js
+- /usr/share/nodejs/npm/bin/npm-cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1219:15)
+    at Module._load (node:internal/modules/cjs/loader:1045:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:215:24)
+    at Module.require (node:internal/modules/cjs/loader:1304:12)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/usr/share/nodejs/npm/lib/utils/unsupported.js:2:16)
+    at Module._compile (node:internal/modules/cjs/loader:1504:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1588:10)
+    at Module.load (node:internal/modules/cjs/loader:1282:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/share/nodejs/npm/lib/utils/unsupported.js',
+    '/usr/share/nodejs/npm/lib/cli.js',
+    '/usr/share/nodejs/npm/bin/npm-cli.js'
+  ]
+}
+
+Node.js v22.5.1
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+up to date, audited 388 packages in 2s
+
+40 packages are looking for funding
+  run `npm fund` for details
+
+4 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+> site-bot@1.0.0 build
+> tsc
+
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+> site-bot@1.0.0 start
+> node dist/index.js
+
+🔧 WhatsApp Service initialized:
+📱 Phone Number ID: 683782988142735
+🔐 Token exists: true
+🔐 Token length: 239
+🔐 Token first 20 chars: EAAXbuPuiqWsBO6dZCtC...
+🔧 R2 Service initialized:
+📦 Bucket: reeva-erp
+🌐 Public URL: https://pub-480de15262b346c8b5ebf5e8141b43f9.r2.dev
+🏗️ [HANDLER] Initializing MessageHandler...
+🔄 [DB] Creating new database pool...
+✅ [DB] Database pool created
+✅ Database connection successful
+🚀 Server running on port 3011
+📱 WhatsApp webhook endpoint: http://localhost:3011/webhook
+🔍 Health check: http://localhost:3011/health
+Killed
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+up to date, audited 388 packages in 2s
+
+40 packages are looking for funding
+  run `npm fund` for details
+
+4 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+> site-bot@1.0.0 build
+> tsc
+
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+> site-bot@1.0.0 start
+> node dist/index.js
+
+🔧 WhatsApp Service initialized:
+📱 Phone Number ID: 683782988142735
+🔐 Token exists: true
+🔐 Token length: 239
+🔐 Token first 20 chars: EAAXbuPuiqWsBO6dZCtC...
+🔧 R2 Service initialized:
+📦 Bucket: reeva-erp
+🌐 Public URL: https://pub-480de15262b346c8b5ebf5e8141b43f9.r2.dev
+🏗️ [HANDLER] Initializing MessageHandler...
+🔄 [DB] Creating new database pool...
+✅ [DB] Database pool created
+✅ Database connection successful
+🚀 Server running on port 3011
+📱 WhatsApp webhook endpoint: http://localhost:3011/webhook
+🔍 Health check: http://localhost:3011/health
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+up to date, audited 388 packages in 2s
+
+40 packages are looking for funding
+  run `npm fund` for details
+
+4 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+> site-bot@1.0.0 build
+> tsc
+
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+> site-bot@1.0.0 start
+> node dist/index.js
+
+🔧 WhatsApp Service initialized:
+📱 Phone Number ID: 683782988142735
+🔐 Token exists: true
+🔐 Token length: 239
+🔐 Token first 20 chars: EAAXbuPuiqWsBO6dZCtC...
+🔧 R2 Service initialized:
+📦 Bucket: reeva-erp
+🌐 Public URL: https://pub-480de15262b346c8b5ebf5e8141b43f9.r2.dev
+🏗️ [HANDLER] Initializing MessageHandler...
+🔄 [DB] Creating new database pool...
+✅ [DB] Database pool created
+✅ Database connection successful
+🚀 Server running on port 3011
+📱 WhatsApp webhook endpoint: http://localhost:3011/webhook
+🔍 Health check: http://localhost:3011/health
+2025-05-30T13:04:09.201Z - GET /favicon.ico
+2025-05-30T13:05:13.664Z - GET /health
+2025-05-30T13:05:35.571Z - GET /
+2025-05-30T13:06:06.959Z - GET /webhook
+🔐 Webhook verification request: { mode: 'subscribe', token: 'qsefthuko' }
+✅ Webhook verified successfully
+2025-05-30T13:06:15.774Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📨 [WEBHOOK] Received message from +19088483575: {
+  type: 'text',
+  id: 'wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQTQ3RTk0QjhFNDlFQ0Q2MzQ1OQA=',
+  timestamp: '1748610374'
+}
+[WEBHOOK] Message content: {
+  "from": "19088483575",
+  "id": "wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQTQ3RTk0QjhFNDlFQ0Q2MzQ1OQA=",
+  "timestamp": "1748610374",
+  "text": {
+    "body": "Hi"
+  },
+  "type": "text"
+}
+📤 [WEBHOOK] Calling messageHandler.handleMessage...
+🎯 [HANDLER] Starting handleMessage...
+📱 [HANDLER] Normalized phone: +19088483575
+🗄️ [HANDLER] Testing database connection...
+📝 [HANDLER] Logging message...
+👁️ [HANDLER] Marking message as read...
+👤 [HANDLER] Getting/creating user...
+✅ [HANDLER] User obtained: customer
+🔄 [HANDLER] Getting/creating session...
+✅ [HANDLER] Session obtained
+👤 [HANDLER] User: customer, Phone: +19088483575
+💬 [HANDLER] Message: "Hi"
+📸 [HANDLER] Has Image: false
+🎯 [HANDLER] Session: none, Step: none
+🚦 [HANDLER] Routing to customer flow...
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "interactive",
+  "interactive": {
+    "type": "button",
+    "body": {
+      "text": "🏗️ Welcome to our Site Management Service!\n\nHow can I help you today?"
+    },
+    "action": {
+      "buttons": [
+        {
+          "type": "reply",
+          "reply": {
+            "id": "book_visit",
+            "title": "📅 Book Site Visit"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "check_availability",
+            "title": "🕐 Check Availability"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "pricing",
+            "title": "💰 Pricing & Plans"
+          }
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBJDMzUwQzE4QUVEMDIxNDZCMjAA'
+    }
+  ]
+}
+✅ [HANDLER] Flow handling completed
+✅ [WEBHOOK] Message handled successfully
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Or choose from more options:"
+    },
+    "action": {
+      "button": "Select Option",
+      "sections": [
+        {
+          "title": "Services",
+          "rows": [
+            {
+              "id": "talk_to_sales",
+              "title": "📞 Talk to Sales",
+              "description": "Connect with our sales team"
+            },
+            {
+              "id": "help",
+              "title": "❓ Help",
+              "description": "Get help and support"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+2025-05-30T13:06:18.946Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload
+2025-05-30T13:06:18.948Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBIxMjMyNUREMUE3NTdFQUI3QkQA'
+    }
+  ]
+}
+2025-05-30T13:06:19.512Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload
+2025-05-30T13:06:20.109Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload
+2025-05-30T13:06:20.788Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload
+2025-05-30T13:06:21.030Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload

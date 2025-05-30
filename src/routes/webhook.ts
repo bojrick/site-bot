@@ -30,13 +30,22 @@ router.post('/', async (req: Request, res: Response) => {
     // Always respond with 200 OK immediately
     res.status(200).send('OK');
 
+    console.log('🚀 [WEBHOOK] Starting webhook processing...');
+    console.log('🔍 [WEBHOOK] Environment check:', {
+      NODE_ENV: process.env.NODE_ENV,
+      HAS_WHATSAPP_TOKEN: !!process.env.META_WHATSAPP_TOKEN,
+      HAS_PHONE_ID: !!process.env.META_PHONE_NUMBER_ID,
+      HAS_DB_URL: !!process.env.SUPABASE_DB_URL,
+      DB_URL_LENGTH: process.env.SUPABASE_DB_URL?.length || 0,
+    });
+
     // Extract message data
     const entry = body.entry?.[0];
     const changes = entry?.changes?.[0];
     const value = changes?.value;
 
     if (!value?.messages || value.messages.length === 0) {
-      console.log('📭 No messages in webhook payload');
+      console.log('📭 [WEBHOOK] No messages in webhook payload');
       return;
     }
 
@@ -44,24 +53,33 @@ router.post('/', async (req: Request, res: Response) => {
     const from = extractPhoneFromWebhook(body);
 
     if (!from) {
-      console.log('❌ Could not extract phone number from webhook');
+      console.log('❌ [WEBHOOK] Could not extract phone number from webhook');
       return;
     }
 
-    console.log(`📨 Received message from ${from}:`, {
+    console.log(`📨 [WEBHOOK] Received message from ${from}:`, {
       type: message.type,
       id: message.id,
       timestamp: message.timestamp
     });
 
     // Log the message for debugging
-    console.log('Message content:', JSON.stringify(message, null, 2));
+    console.log('[WEBHOOK] Message content:', JSON.stringify(message, null, 2));
 
-    // Process the message
-    await messageHandler.handleMessage(from, message);
+    // Process the message with error tracking
+    console.log('📤 [WEBHOOK] Calling messageHandler.handleMessage...');
+    
+    try {
+      await messageHandler.handleMessage(from, message);
+      console.log('✅ [WEBHOOK] Message handled successfully');
+    } catch (handlerError) {
+      console.error('❌ [WEBHOOK] Error in messageHandler:', handlerError);
+      console.error('[WEBHOOK] Stack trace:', handlerError instanceof Error ? handlerError.stack : 'No stack');
+    }
 
   } catch (error) {
-    console.error('❌ Error processing webhook:', error);
+    console.error('❌ [WEBHOOK] Top-level error processing webhook:', error);
+    console.error('[WEBHOOK] Stack trace:', error instanceof Error ? error.stack : 'No stack');
     // Don't throw error - already sent 200 OK response
   }
 });

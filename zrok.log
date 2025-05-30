@@ -1,0 +1,50 @@
+{"file":"/github/home/go/pkg/mod/github.com/openziti/sdk-golang@v1.1.0/ziti/ziti.go:2166","func":"github.com/openziti/sdk-golang/ziti.(*listenerManager).createSessionWithBackoff","level":"info","msg":"new service session","session token":"baec75b2-8680-4fa4-b43e-1db8d0c2bc23","time":"2025-05-30T07:49:46.910Z"}
+[ERROR]: An error occurred (open /dev/tty: no such device or address)
+{"file":"/github/home/go/pkg/mod/github.com/openziti/sdk-golang@v1.1.0/ziti/ziti.go:2166","func":"github.com/openziti/sdk-golang/ziti.(*listenerManager).createSessionWithBackoff","level":"info","msg":"new service session","session token":"d3d70ad5-006b-4936-9766-89588bc93f94","time":"2025-05-30T07:50:14.190Z"}
+[ERROR]: An error occurred (open /dev/tty: no such device or address)
+{"file":"/github/home/go/pkg/mod/github.com/openziti/sdk-golang@v1.1.0/ziti/ziti.go:2166","func":"github.com/openziti/sdk-golang/ziti.(*listenerManager).createSessionWithBackoff","level":"info","msg":"new service session","session token":"543e3d43-ff4e-447d-a661-33992d997de6","time":"2025-05-30T07:50:41.910Z"}
+[ERROR]: An error occurred (open /dev/tty: no such device or address)
+{"file":"/github/home/go/pkg/mod/github.com/openziti/sdk-golang@v1.1.0/ziti/ziti.go:2166","func":"github.com/openziti/sdk-golang/ziti.(*listenerManager).createSessionWithBackoff","level":"info","msg":"new service session","session token":"3cbd69c0-249c-46ed-86cf-51e3d75631dc","time":"2025-05-30T07:51:09.207Z"}
+[ERROR]: An error occurred (open /dev/tty: no such device or address)
+{"file":"/github/home/go/pkg/mod/github.com/openziti/sdk-golang@v1.1.0/ziti/ziti.go:2166","func":"github.com/openziti/sdk-golang/ziti.(*listenerManager).createSessionWithBackoff","level":"info","msg":"new service session","session token":"5d42b9ce-36eb-43ae-8065-007a9f78ed30","time":"2025-05-30T07:51:37.127Z"}
+[ERROR]: An error occurred (open /dev/tty: no such device or address)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to create share: [POST /share][401] shareUnauthorized)
+[ERROR]: unable to create share (unable to load environment; did you 'zrok enable'?)
+{"file":"/github/home/go/pkg/mod/github.com/openziti/sdk-golang@v1.1.0/ziti/ziti.go:2166","func":"github.com/openziti/sdk-golang/ziti.(*listenerManager).createSessionWithBackoff","level":"info","msg":"new service session","session token":"eefd7c6a-c4e2-44d9-92e3-654ebf92a4ba","time":"2025-05-30T08:01:34.573Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:288","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"access your zrok share at the following endpoints:\n https://v6qo2ek1b9h8.share.zrok.io","time":"2025-05-30T08:01:35.021Z"}
+{"file":"/github/home/go/pkg/mod/github.com/openziti/sdk-golang@v1.1.0/ziti/ziti.go:2166","func":"github.com/openziti/sdk-golang/ziti.(*listenerManager).createSessionWithBackoff","level":"info","msg":"new service session","session token":"b89e6c06-8bb5-459d-949f-e4f69a68bbf9","time":"2025-05-30T08:02:09.949Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:288","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"access your zrok share at the following endpoints:\n https://54wukryxuwb6.share.zrok.io","time":"2025-05-30T08:02:10.408Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:292","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"[] -\u003e GET /favicon.ico","time":"2025-05-30T08:04:09.197Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:292","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"[] -\u003e GET /health","time":"2025-05-30T08:05:13.663Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:292","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"[] -\u003e GET /","time":"2025-05-30T08:05:35.570Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:292","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"[] -\u003e GET /webhook?hub.mode=subscribe\u0026hub.challenge=1594976134\u0026hub.verify_token=qsefthuko","time":"2025-05-30T08:06:06.958Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:292","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"[] -\u003e POST /webhook","time":"2025-05-30T08:06:15.763Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:292","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"[] -\u003e POST /webhook","time":"2025-05-30T08:06:18.945Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:292","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"[] -\u003e POST /webhook","time":"2025-05-30T08:06:18.945Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:292","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"[] -\u003e POST /webhook","time":"2025-05-30T08:06:19.512Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:292","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"[] -\u003e POST /webhook","time":"2025-05-30T08:06:20.109Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:292","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"[] -\u003e POST /webhook","time":"2025-05-30T08:06:20.787Z"}
+{"file":"/__w/zrok/zrok/cmd/zrok/sharePublic.go:292","func":"main.(*sharePublicCommand).shareLocal","level":"info","msg":"[] -\u003e POST /webhook","time":"2025-05-30T08:06:21.029Z"}

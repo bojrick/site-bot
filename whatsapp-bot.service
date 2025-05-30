@@ -1,0 +1,29 @@
+[Unit]
+Description=WhatsApp Bot CRM Service
+After=network.target
+
+[Service]
+Type=simple
+User=bojrick
+WorkingDirectory=/home/bojrick/reeva-whatsapp-crm-erp/site-bot
+Environment="PATH=/home/bojrick/.volta/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="NODE_ENV=production"
+EnvironmentFile=-/home/bojrick/reeva-whatsapp-crm-erp/site-bot/.env
+ExecStartPre=/home/bojrick/.volta/bin/npm install
+ExecStartPre=/home/bojrick/.volta/bin/npm run build
+ExecStart=/home/bojrick/.volta/bin/npm run start
+Restart=always
+RestartSec=10
+StandardOutput=append:/home/bojrick/reeva-whatsapp-crm-erp/site-bot/server.log
+StandardError=append:/home/bojrick/reeva-whatsapp-crm-erp/site-bot/server.log
+
+# Resource limits
+LimitNOFILE=65536
+MemoryLimit=1G
+
+# Security settings
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target 

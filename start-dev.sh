@@ -31,9 +31,9 @@ SERVER_PID=$!
 sleep 3
 
 echo ""
-echo "🌐 Starting ngrok tunnel..."
+echo "🌐 Starting zrok tunnel..."
 echo "📱 Your webhook URL will be displayed below:"
 echo ""
 
 # Start ngrok
-ngrok http 3000 
+zrok share public 3011

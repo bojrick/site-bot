@@ -20,7 +20,8 @@
     "test-r2": "ts-node scripts/testR2.ts",
     "test-r2-public": "ts-node scripts/testR2Public.ts",
     "test-image-urls": "ts-node scripts/testImageUrlStorage.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "vercel-build": "npm run build"
   },
   "keywords": [
     "whatsapp",
