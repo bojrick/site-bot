@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
-    "build": "tsc --project tsconfig.json",
+    "build": "tsc",
     "start": "node dist/index.js",
     "drizzle:generate": "drizzle-kit generate:pg",
     "drizzle:push": "drizzle-kit push:pg",
@@ -21,7 +21,7 @@
     "test-r2-public": "ts-node scripts/testR2Public.ts",
     "test-image-urls": "ts-node scripts/testImageUrlStorage.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "vercel-build": "tsc --project tsconfig.json"
+    "vercel-build": "tsc"
   },
   "keywords": [
     "whatsapp",
@@ -56,5 +56,8 @@
     "drizzle-kit": "^0.20.14",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
