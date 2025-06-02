@@ -15,19 +15,25 @@ function getDatabase() {
       console.error('❌ [DB] SUPABASE_DB_URL not set!');
       throw new Error('Database connection string not configured');
     }
+
+    // Add connection parameters if not already present
+    const connStringWithParams = connectionString.includes('?') 
+      ? connectionString + '&pgbouncer=true&connect_timeout=15&pool_timeout=15&connection_limit=5'
+      : connectionString + '?pgbouncer=true&connect_timeout=15&pool_timeout=15&connection_limit=5';
     
     console.log('🔄 [DB] Creating new database pool...');
     pool = new Pool({
-      connectionString,
+      connectionString: connStringWithParams,
       ssl: {
-        rejectUnauthorized: false // Required for Supabase pooler
+        rejectUnauthorized: false,
+        requestCert: true
       },
-      max: 1, // Keep one connection for serverless
-      idleTimeoutMillis: 30000, // 30 second idle timeout
-      connectionTimeoutMillis: 5000, // 5 second connection timeout
-      keepAlive: true, // Enable TCP keepalive
-      keepAliveInitialDelayMillis: 1000, // Start keepalive after 1 second
-      statement_timeout: 10000, // 10 second query timeout
+      max: 5, // Increase from 1 to 5 for better connection handling
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 15000,
+      keepAlive: true,
+      keepAliveInitialDelayMillis: 1000,
+      statement_timeout: 15000,
     });
     
     // Add error handling
@@ -72,17 +78,18 @@ export async function testConnection() {
     console.log('🔄 [DB] Testing connection...');
     const { pool } = getDatabase();
     
-    // Try to get a client with a shorter timeout
+    // Try to get a client with a longer timeout
     const client = await Promise.race([
       pool.connect(),
       new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Connection timeout')), 3000)
+        setTimeout(() => reject(new Error('Connection timeout')), 15000)
       )
     ]) as any;
 
     try {
       console.log('✅ [DB] Client acquired, testing query...');
-      await client.query('SELECT 1');
+      // Use a query with timeout
+      await client.query('SELECT 1 /* connection test */ ');
       console.log('✅ [DB] Database connection and query successful');
       return true;
     } catch (queryError) {
@@ -90,7 +97,9 @@ export async function testConnection() {
       return false;
     } finally {
       console.log('🔄 [DB] Releasing client...');
-      client?.release?.(true);
+      if (client?.release) {
+        await client.release(true);
+      }
     }
   } catch (error) {
     console.error('❌ [DB] Connection test failed:', error);
@@ -98,8 +107,9 @@ export async function testConnection() {
     const connStr = process.env.SUPABASE_DB_URL || '';
     console.log('🔍 [DB] Connection details:');
     console.log('- Host:', connStr.split('@')[1]?.split('/')[0] || 'unknown');
-    console.log('- Database:', connStr.split('/').pop() || 'unknown');
-    console.log('- SSL:', process.env.NODE_ENV === 'production' ? 'enabled' : 'disabled');
+    console.log('- Database:', connStr.split('/').pop()?.split('?')[0] || 'unknown');
+    console.log('- Using pgbouncer:', connStr.includes('pgbouncer=true'));
+    console.log('- Region:', process.env.VERCEL_REGION || 'unknown');
     
     if (pool) {
       try {
