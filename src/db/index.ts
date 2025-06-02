@@ -19,17 +19,31 @@ function getDatabase() {
     console.log('🔄 [DB] Creating new database pool...');
     pool = new Pool({
       connectionString,
-      ssl: true, // Always use SSL for Supabase pooler
+      ssl: {
+        rejectUnauthorized: false // Required for Supabase pooler
+      },
       max: 1, // Keep one connection for serverless
-      idleTimeoutMillis: 120000, // 2 minute idle timeout
-      connectionTimeoutMillis: 3000, // Match the handler timeout
+      idleTimeoutMillis: 30000, // 30 second idle timeout
+      connectionTimeoutMillis: 5000, // 5 second connection timeout
       keepAlive: true, // Enable TCP keepalive
+      keepAliveInitialDelayMillis: 1000, // Start keepalive after 1 second
       statement_timeout: 10000, // 10 second query timeout
     });
     
     // Add error handling
     pool.on('error', (err) => {
       console.error('❌ [DB] Unexpected pool error:', err);
+      // Reset pool on error
+      pool = null;
+      db = null;
+    });
+    
+    // Add connect handling
+    pool.on('connect', (client) => {
+      console.log('✅ [DB] New client connected');
+      client.on('error', (err) => {
+        console.error('❌ [DB] Client error:', err);
+      });
     });
     
     db = drizzle(pool, { schema });
@@ -55,23 +69,46 @@ export const getDb = (): ReturnType<typeof drizzle> => {
 // Helper function to test database connection
 export async function testConnection() {
   try {
+    console.log('🔄 [DB] Testing connection...');
     const { pool } = getDatabase();
-    const client = await pool.connect();
+    
+    // Try to get a client with a shorter timeout
+    const client = await Promise.race([
+      pool.connect(),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Connection timeout')), 3000)
+      )
+    ]) as any;
+
     try {
-      await client.query('SELECT 1'); // Lighter query than NOW()
-      console.log('✅ Database connection successful');
+      console.log('✅ [DB] Client acquired, testing query...');
+      await client.query('SELECT 1');
+      console.log('✅ [DB] Database connection and query successful');
       return true;
+    } catch (queryError) {
+      console.error('❌ [DB] Query failed:', queryError);
+      return false;
     } finally {
-      client.release(true); // Force release the client
+      console.log('🔄 [DB] Releasing client...');
+      client?.release?.(true);
     }
   } catch (error) {
-    console.error('❌ Database connection failed:', error);
+    console.error('❌ [DB] Connection test failed:', error);
+    // Log connection details (without sensitive info)
+    const connStr = process.env.SUPABASE_DB_URL || '';
+    console.log('🔍 [DB] Connection details:');
+    console.log('- Host:', connStr.split('@')[1]?.split('/')[0] || 'unknown');
+    console.log('- Database:', connStr.split('/').pop() || 'unknown');
+    console.log('- SSL:', process.env.NODE_ENV === 'production' ? 'enabled' : 'disabled');
+    
     if (pool) {
       try {
-        await pool.end(); // Clean up the pool on error
+        await pool.end();
       } catch (endError) {
         console.error('Failed to end pool:', endError);
       }
+      pool = null;
+      db = null;
     }
     return false;
   }
