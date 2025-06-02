@@ -1,3 +1,6 @@
 node_modules
 .env
 .vercel
+.install-service.sh
+zork.log
+dist

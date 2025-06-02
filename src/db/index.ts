@@ -19,11 +19,12 @@ function getDatabase() {
     console.log('🔄 [DB] Creating new database pool...');
     pool = new Pool({
       connectionString,
-      ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
-      // Serverless-optimized settings
-      max: 1, // Minimize connections for serverless
-      idleTimeoutMillis: 0, // Disable idle timeout
-      connectionTimeoutMillis: 5000, // 5 second connection timeout
+      ssl: true, // Always use SSL for Supabase pooler
+      max: 1, // Keep one connection for serverless
+      idleTimeoutMillis: 120000, // 2 minute idle timeout
+      connectionTimeoutMillis: 3000, // Match the handler timeout
+      keepAlive: true, // Enable TCP keepalive
+      statement_timeout: 10000, // 10 second query timeout
     });
     
     // Add error handling
@@ -56,12 +57,22 @@ export async function testConnection() {
   try {
     const { pool } = getDatabase();
     const client = await pool.connect();
-    await client.query('SELECT NOW()');
-    client.release();
-    console.log('✅ Database connection successful');
-    return true;
+    try {
+      await client.query('SELECT 1'); // Lighter query than NOW()
+      console.log('✅ Database connection successful');
+      return true;
+    } finally {
+      client.release(true); // Force release the client
+    }
   } catch (error) {
     console.error('❌ Database connection failed:', error);
+    if (pool) {
+      try {
+        await pool.end(); // Clean up the pool on error
+      } catch (endError) {
+        console.error('Failed to end pool:', endError);
+      }
+    }
     return false;
   }
 }

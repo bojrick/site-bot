@@ -12,7 +12,14 @@
       "dest": "src/index.ts"
     }
   ],
+  "regions": ["sin1"],
   "env": {
     "NODE_ENV": "production"
+  },
+  "functions": {
+    "src/index.ts": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
   }
 } 

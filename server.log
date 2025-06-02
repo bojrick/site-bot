@@ -4025,3 +4025,227 @@ npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm 
   DB_URL_LENGTH: 110
 }
 📭 [WEBHOOK] No messages in webhook payload
+2025-05-31T02:05:35.803Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📨 [WEBHOOK] Received message from +19088483575: {
+  type: 'text',
+  id: 'wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQTY1M0M3NTM2OTU1MTkxRTc3RgA=',
+  timestamp: '1748657133'
+}
+[WEBHOOK] Message content: {
+  "from": "19088483575",
+  "id": "wamid.HBgLMTkwODg0ODM1NzUVAgASGBQzQTY1M0M3NTM2OTU1MTkxRTc3RgA=",
+  "timestamp": "1748657133",
+  "text": {
+    "body": "Hey"
+  },
+  "type": "text"
+}
+📤 [WEBHOOK] Calling messageHandler.handleMessage...
+🎯 [HANDLER] Starting handleMessage...
+📱 [HANDLER] Normalized phone: +19088483575
+🗄️ [HANDLER] Testing database connection...
+📝 [HANDLER] Logging message...
+👁️ [HANDLER] Marking message as read...
+👤 [HANDLER] Getting/creating user...
+✅ [HANDLER] User obtained: customer
+🔄 [HANDLER] Getting/creating session...
+✅ [HANDLER] Session obtained
+👤 [HANDLER] User: customer, Phone: +19088483575
+💬 [HANDLER] Message: "Hey"
+📸 [HANDLER] Has Image: false
+🎯 [HANDLER] Session: none, Step: none
+🚦 [HANDLER] Routing to customer flow...
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "interactive",
+  "interactive": {
+    "type": "button",
+    "body": {
+      "text": "🏗️ Welcome to our Site Management Service!\n\nHow can I help you today?"
+    },
+    "action": {
+      "buttons": [
+        {
+          "type": "reply",
+          "reply": {
+            "id": "book_visit",
+            "title": "📅 Book Site Visit"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "check_availability",
+            "title": "🕐 Check Availability"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "pricing",
+            "title": "💰 Pricing & Plans"
+          }
+        }
+      ]
+    }
+  }
+}
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBJCMUFFRkVDQkQ3M0RCMjFBMDUA'
+    }
+  ]
+}
+✅ [HANDLER] Flow handling completed
+✅ [WEBHOOK] Message handled successfully
+2025-05-31T02:05:38.820Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload
+📤 Sending message to WhatsApp API...
+🔗 URL: https://graph.facebook.com/v18.0/683782988142735/messages
+📱 Phone Number ID: 683782988142735
+🔐 Token (first 20): EAAXbuPuiqWsBO6dZCtC...
+📦 Payload: {
+  "messaging_product": "whatsapp",
+  "to": "+19088483575",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "body": {
+      "text": "Or choose from more options:"
+    },
+    "action": {
+      "button": "Select Option",
+      "sections": [
+        {
+          "title": "Services",
+          "rows": [
+            {
+              "id": "talk_to_sales",
+              "title": "📞 Talk to Sales",
+              "description": "Connect with our sales team"
+            },
+            {
+              "id": "help",
+              "title": "❓ Help",
+              "description": "Get help and support"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+2025-05-31T02:05:39.592Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload
+✅ Message sent successfully: {
+  messaging_product: 'whatsapp',
+  contacts: [ { input: '+19088483575', wa_id: '19088483575' } ],
+  messages: [
+    {
+      id: 'wamid.HBgLMTkwODg0ODM1NzUVAgARGBJGN0U4OTc2MUE0QTk5MTg4NEQA'
+    }
+  ]
+}
+2025-05-31T02:05:39.830Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload
+2025-05-31T02:05:40.765Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload
+2025-05-31T02:05:41.127Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload
+2025-05-31T02:11:21.399Z - POST /webhook
+🚀 [WEBHOOK] Starting webhook processing...
+🔍 [WEBHOOK] Environment check: {
+  NODE_ENV: 'development',
+  HAS_WHATSAPP_TOKEN: true,
+  HAS_PHONE_ID: true,
+  HAS_DB_URL: true,
+  DB_URL_LENGTH: 110
+}
+📭 [WEBHOOK] No messages in webhook payload
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+up to date in 3s
+
+40 packages are looking for funding
+  run `npm fund` for details
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+> site-bot@1.0.0 build
+> tsc
+
+npm warn cli npm v11.1.0 does not support Node.js v20.16.0. This version of npm supports the following node versions: `^20.17.0 || >=22.9.0`. You can find the latest version at https://nodejs.org/.
+
+> site-bot@1.0.0 start
+> node dist/index.js
+
+🔧 WhatsApp Service initialized:
+📱 Phone Number ID: 683782988142735
+🔐 Token exists: true
+🔐 Token length: 239
+🔐 Token first 20 chars: EAAXbuPuiqWsBO6dZCtC...
+🔧 R2 Service initialized:
+📦 Bucket: reeva-erp
+🌐 Public URL: https://pub-480de15262b346c8b5ebf5e8141b43f9.r2.dev
+🏗️ [HANDLER] Initializing MessageHandler...
+🔄 [DB] Creating new database pool...
+✅ [DB] Database pool created
+✅ Database connection successful
+🚀 Server running on port 3011
+📱 WhatsApp webhook endpoint: http://localhost:3011/webhook
+🔍 Health check: http://localhost:3011/health
