@@ -2,11 +2,11 @@
   "name": "site-bot",
   "version": "1.0.0",
   "description": "WhatsApp Bot for Site Management and Customer/Employee Interactions",
-  "main": "dist/index.js",
+  "main": "public/index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node public/index.js",
     "drizzle:generate": "drizzle-kit generate:pg",
     "drizzle:push": "drizzle-kit push:pg",
     "drizzle:studio": "drizzle-kit studio",
