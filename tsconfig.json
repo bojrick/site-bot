@@ -10,10 +10,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": ".",
     "resolveJsonModule": true,
     "sourceMap": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "drizzle", "scripts"]
+  "include": ["src/**/*", "api/**/*"],
+  "exclude": ["node_modules", "dist", "drizzle"]
 } 

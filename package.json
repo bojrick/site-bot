@@ -2,11 +2,12 @@
   "name": "site-bot",
   "version": "1.0.0",
   "description": "WhatsApp Bot for Site Management and Customer/Employee Interactions",
-  "main": "dist/index.js",
+  "main": "api/index.ts",
   "scripts": {
     "dev": "ts-node src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
+    "vercel-build": "tsc --project tsconfig.json",
     "drizzle:generate": "drizzle-kit generate:pg",
     "drizzle:push": "drizzle-kit push:pg",
     "drizzle:studio": "drizzle-kit studio",
@@ -20,8 +21,7 @@
     "test-r2": "ts-node scripts/testR2.ts",
     "test-r2-public": "ts-node scripts/testR2Public.ts",
     "test-image-urls": "ts-node scripts/testImageUrlStorage.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "vercel-build": "tsc"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "whatsapp",
