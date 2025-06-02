@@ -9,7 +9,7 @@
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "dist",
+    "outDir": "public",
     "rootDir": "src",
     "resolveJsonModule": true,
     "sourceMap": true
