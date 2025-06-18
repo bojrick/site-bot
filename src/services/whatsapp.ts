@@ -184,6 +184,33 @@ export class WhatsAppService {
     }
   }
 
+  // Send document message
+  async sendDocumentMessage(
+    to: string,
+    documentUrl: string,
+    filename: string,
+    caption?: string
+  ): Promise<boolean> {
+    try {
+      const payload = {
+        messaging_product: 'whatsapp',
+        to,
+        type: 'document',
+        document: {
+          link: documentUrl,
+          filename: filename,
+          caption: caption
+        }
+      };
+
+      await this.sendMessage(payload as WhatsAppMessage);
+      return true;
+    } catch (error) {
+      console.error('Error sending document message:', error);
+      return false;
+    }
+  }
+
   // Get media URL from media ID
   async getMediaUrl(mediaId: string): Promise<string | null> {
     try {

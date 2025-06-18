@@ -1,5 +1,6 @@
 import express from 'express';
 import { EmployeeService } from '../services/employeeService';
+import { introductionService } from '../services/introductionService';
 
 const router = express.Router();
 const employeeService = new EmployeeService();
@@ -75,6 +76,8 @@ router.get('/employees', async (req, res) => {
         email: emp.email,
         is_verified: emp.is_verified,
         verified_at: emp.verified_at,
+        introduction_sent: emp.introduction_sent,
+        introduction_sent_at: emp.introduction_sent_at,
         created_at: emp.created_at,
         updated_at: emp.updated_at
       }))
@@ -123,6 +126,90 @@ router.delete('/employees/:phone', async (req, res) => {
     return res.status(result.success ? 200 : 400).json(result);
   } catch (error) {
     console.error('Error in remove employee route:', error);
+    return res.status(500).json({ 
+      success: false, 
+      message: 'Internal server error' 
+    });
+  }
+});
+
+// Send introduction message to specific employee
+router.post('/employees/:phone/introduction', async (req, res) => {
+  try {
+    const { phone } = req.params;
+    
+    const success = await introductionService.sendIntroductionMessage(phone);
+    
+    return res.json({
+      success,
+      message: success 
+        ? 'Introduction message sent successfully' 
+        : 'Failed to send introduction message'
+    });
+  } catch (error) {
+    console.error('Error in send introduction route:', error);
+    return res.status(500).json({ 
+      success: false, 
+      message: 'Internal server error' 
+    });
+  }
+});
+
+// Send introduction messages to all pending employees
+router.post('/employees/introduction/send-pending', async (req, res) => {
+  try {
+    const result = await introductionService.sendPendingIntroductionMessages();
+    
+    return res.json({
+      success: true,
+      message: `Introduction messages processed: ${result.sent} sent, ${result.failed} failed`,
+      ...result
+    });
+  } catch (error) {
+    console.error('Error in send pending introductions route:', error);
+    return res.status(500).json({ 
+      success: false, 
+      message: 'Internal server error' 
+    });
+  }
+});
+
+// Check introduction status for specific employee
+router.get('/employees/:phone/introduction', async (req, res) => {
+  try {
+    const { phone } = req.params;
+    
+    const sent = await introductionService.isIntroductionSent(phone);
+    
+    return res.json({
+      success: true,
+      phone,
+      introduction_sent: sent
+    });
+  } catch (error) {
+    console.error('Error in get introduction status route:', error);
+    return res.status(500).json({ 
+      success: false, 
+      message: 'Internal server error' 
+    });
+  }
+});
+
+// Reset introduction status for specific employee (for testing)
+router.delete('/employees/:phone/introduction', async (req, res) => {
+  try {
+    const { phone } = req.params;
+    
+    const success = await introductionService.resetIntroductionStatus(phone);
+    
+    return res.json({
+      success,
+      message: success 
+        ? 'Introduction status reset successfully' 
+        : 'Failed to reset introduction status'
+    });
+  } catch (error) {
+    console.error('Error in reset introduction status route:', error);
     return res.status(500).json({ 
       success: false, 
       message: 'Internal server error' 

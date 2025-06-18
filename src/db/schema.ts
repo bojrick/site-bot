@@ -9,15 +9,17 @@ import {
   integer 
 } from "drizzle-orm/pg-core";
 
-// Users table for both employees and customers
+// Users table for employees, customers, and admins
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
   phone: varchar("phone", { length: 20 }).notNull().unique(),
-  role: text("role", { enum: ["employee", "customer"] }).notNull(),
+  role: text("role", { enum: ["employee", "customer", "admin"] }).notNull(),
   name: varchar("name", { length: 255 }),
   email: varchar("email", { length: 255 }),
   is_verified: boolean("is_verified").default(false),
   verified_at: timestamp("verified_at"),
+  introduction_sent: boolean("introduction_sent").default(false),
+  introduction_sent_at: timestamp("introduction_sent_at"),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
 });
@@ -104,6 +106,26 @@ export const material_requests = pgTable("material_requests", {
   created_at: timestamp("created_at").defaultNow(),
 });
 
+// Invoice tracking for received invoices
+export const invoices = pgTable("invoices", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  user_id: uuid("user_id").references(() => users.id),
+  company_name: varchar("company_name", { length: 255 }).notNull(),
+  invoice_description: text("invoice_description").notNull(),
+  invoice_date: timestamp("invoice_date").notNull(),
+  amount: integer("amount").notNull(), // Amount in paise/cents for precision
+  currency: varchar("currency", { length: 3 }).default("INR"),
+  site_id: uuid("site_id").references(() => sites.id),
+  status: text("status", { 
+    enum: ["received", "processing", "approved", "paid", "rejected"] 
+  }).default("received"),
+  image_url: text("image_url"), // Cloudflare R2 public URL of invoice image
+  image_key: text("image_key"), // R2 object key for management
+  notes: text("notes"),
+  created_at: timestamp("created_at").defaultNow(),
+  updated_at: timestamp("updated_at").defaultNow(),
+});
+
 // Message logs for audit trail
 export const message_logs = pgTable("message_logs", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -112,6 +134,52 @@ export const message_logs = pgTable("message_logs", {
   message_type: varchar("message_type", { length: 50 }),
   content: text("content"),
   metadata: jsonb("metadata"),
+  created_at: timestamp("created_at").defaultNow(),
+});
+
+// Customer inquiries for detailed lead capture
+export const customer_inquiries = pgTable("customer_inquiries", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  phone: varchar("phone", { length: 20 }).notNull(),
+  full_name: varchar("full_name", { length: 255 }),
+  email: varchar("email", { length: 255 }),
+  occupation: varchar("occupation", { length: 255 }),
+  office_space_requirement: text("office_space_requirement"),
+  office_space_use: text("office_space_use"),
+  expected_price_range: varchar("expected_price_range", { length: 100 }),
+  status: text("status", { 
+    enum: ["inquiry", "site_visit_booked", "converted", "lost"] 
+  }).default("inquiry"),
+  notes: text("notes"),
+  created_at: timestamp("created_at").defaultNow(),
+  updated_at: timestamp("updated_at").defaultNow(),
+});
+
+// Inventory items master table
+export const inventory_items = pgTable("inventory_items", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: varchar("name", { length: 255 }).notNull(),
+  unit: varchar("unit", { length: 50 }).notNull(), // kg, pcs, bags, etc.
+  current_stock: integer("current_stock").default(0),
+  category: varchar("category", { length: 100 }), // building_material, contractor_materials, electrical_materials
+  site_id: uuid("site_id").references(() => sites.id),
+  status: text("status", { enum: ["active", "inactive"] }).default("active"),
+  created_by: uuid("created_by").references(() => users.id),
+  created_at: timestamp("created_at").defaultNow(),
+  updated_at: timestamp("updated_at").defaultNow(),
+});
+
+// Inventory transactions for in/out tracking
+export const inventory_transactions = pgTable("inventory_transactions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  item_id: uuid("item_id").references(() => inventory_items.id).notNull(),
+  site_id: uuid("site_id").references(() => sites.id),
+  transaction_type: text("transaction_type", { enum: ["in", "out"] }).notNull(),
+  quantity: integer("quantity").notNull(),
+  previous_stock: integer("previous_stock").notNull(),
+  new_stock: integer("new_stock").notNull(),
+  notes: text("notes"),
+  created_by: uuid("created_by").references(() => users.id),
   created_at: timestamp("created_at").defaultNow(),
 });
 
@@ -127,4 +195,12 @@ export type NewBooking = typeof bookings.$inferInsert;
 export type Activity = typeof activities.$inferSelect;
 export type NewActivity = typeof activities.$inferInsert;
 export type MaterialRequest = typeof material_requests.$inferSelect;
-export type NewMaterialRequest = typeof material_requests.$inferInsert; 
+export type NewMaterialRequest = typeof material_requests.$inferInsert;
+export type Invoice = typeof invoices.$inferSelect;
+export type NewInvoice = typeof invoices.$inferInsert;
+export type CustomerInquiry = typeof customer_inquiries.$inferSelect;
+export type NewCustomerInquiry = typeof customer_inquiries.$inferInsert;
+export type InventoryItem = typeof inventory_items.$inferSelect;
+export type NewInventoryItem = typeof inventory_items.$inferInsert;
+export type InventoryTransaction = typeof inventory_transactions.$inferSelect;
+export type NewInventoryTransaction = typeof inventory_transactions.$inferInsert; 

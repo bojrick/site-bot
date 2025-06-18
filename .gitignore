@@ -4,3 +4,4 @@ node_modules
 .install-service.sh
 zork.log
 dist
+dist-backend

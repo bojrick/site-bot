@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { testConnection } from './db';
 import webhookRoutes from './routes/webhook';
 import adminRoutes from './routes/admin';
+import zohoRoutes from './routes/zoho';
 
 // Load environment variables
 dotenv.config();
@@ -34,6 +35,9 @@ app.use('/webhook', webhookRoutes);
 
 // Admin routes for employee management
 app.use('/admin', adminRoutes);
+
+// Zoho OAuth and email routes
+app.use('/zoho', zohoRoutes);
 
 // 404 handler
 app.use('*', (req: Request, res: Response) => {

@@ -1,6 +1,7 @@
 import { getDb } from '../db';
 import { users } from '../db/schema';
 import { eq } from 'drizzle-orm';
+import { introductionService } from './introductionService';
 
 export interface AddEmployeeRequest {
   phone: string;
@@ -24,6 +25,8 @@ export class EmployeeService {
         .from(users)
         .where(eq(users.phone, cleanPhone))
         .limit(1);
+
+      let isNewEmployee = false;
 
       if (existingUser.length > 0) {
         const user = existingUser[0];
@@ -49,9 +52,14 @@ export class EmployeeService {
             .where(eq(users.phone, cleanPhone))
             .limit(1);
 
+          isNewEmployee = true; // User converted to employee, so should get introduction
+
+          // Send introduction message asynchronously (don't wait for it)
+          this.sendIntroductionAsync(cleanPhone);
+
           return { 
             success: true, 
-            message: 'User converted to employee',
+            message: 'User converted to employee and introduction message sent',
             user: updatedUser[0]
           };
         }
@@ -71,9 +79,13 @@ export class EmployeeService {
         .returning();
 
       console.log(`✅ Added new employee: ${cleanPhone}`);
+      
+      // Send introduction message asynchronously (don't wait for it)
+      this.sendIntroductionAsync(cleanPhone);
+
       return { 
         success: true, 
-        message: 'Employee added successfully',
+        message: 'Employee added successfully and introduction message sent',
         user: newEmployee[0]
       };
 
@@ -84,6 +96,25 @@ export class EmployeeService {
         message: 'Failed to add employee',
         error: error instanceof Error ? error.message : 'Unknown error'
       };
+    }
+  }
+
+  /**
+   * Send introduction message asynchronously
+   */
+  private async sendIntroductionAsync(phone: string) {
+    try {
+      // Add a small delay to ensure database transaction is committed
+      setTimeout(async () => {
+        const success = await introductionService.sendIntroductionMessage(phone);
+        if (success) {
+          console.log(`📨 Introduction message sent to new employee: ${phone}`);
+        } else {
+          console.log(`⚠️ Failed to send introduction message to: ${phone}`);
+        }
+      }, 2000); // 2 second delay
+    } catch (error) {
+      console.error('Error in sendIntroductionAsync:', error);
     }
   }
 

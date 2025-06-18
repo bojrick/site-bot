@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { testConnection } from '../src/db';
 import webhookRoutes from '../src/routes/webhook';
 import adminRoutes from '../src/routes/admin';
+import zohoRoutes from '../src/routes/zoho';
 
 // Load environment variables
 dotenv.config();
@@ -37,7 +38,8 @@ app.get('/', (req: Request, res: Response) => {
     endpoints: {
       health: '/health',
       webhook: '/webhook',
-      admin: '/admin'
+      admin: '/admin',
+      zoho: '/zoho'
     }
   });
 });
@@ -47,6 +49,9 @@ app.use('/webhook', webhookRoutes);
 
 // Admin routes for employee management
 app.use('/admin', adminRoutes);
+
+// Zoho email dashboard and OAuth routes
+app.use('/zoho', zohoRoutes);
 
 // 404 handler
 app.use('*', (req: Request, res: Response) => {

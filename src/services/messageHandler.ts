@@ -5,6 +5,7 @@ import { whatsappService, ImageMessage } from './whatsapp';
 import { UserService } from './userService';
 import { EmployeeFlow } from './flows/employeeFlow';
 import { CustomerFlow } from './flows/customerFlow';
+import { AdminFlow } from './flows/adminFlow';
 import { normalizePhoneNumber } from '../utils/phone';
 
 export interface WhatsAppMessage {
@@ -47,12 +48,14 @@ export class MessageHandler {
   private userService: UserService;
   private employeeFlow: EmployeeFlow;
   private customerFlow: CustomerFlow;
+  private adminFlow: AdminFlow;
 
   constructor() {
     console.log('🏗️ [HANDLER] Initializing MessageHandler...');
     this.userService = new UserService();
     this.employeeFlow = new EmployeeFlow();
     this.customerFlow = new CustomerFlow();
+    this.adminFlow = new AdminFlow();
   }
 
   async handleMessage(phone: string, message: WhatsAppMessage): Promise<void> {
@@ -106,16 +109,23 @@ export class MessageHandler {
         user = {
           id: 'temp-' + normalizedPhone,
           phone: normalizedPhone,
-          role: 'customer' as const,
+          role: 'customer',
           name: 'Guest',
           email: null,
           is_verified: false,
           verified_at: null,
           created_at: new Date(),
-          updated_at: new Date()
+          updated_at: new Date(),
+          introduction_sent: false,
+          introduction_sent_at: null
         };
       }
-      console.log(`✅ [HANDLER] User obtained: ${user.role}`);
+      // Null check before using user.role
+      if (!user) {
+        console.error('❌ [HANDLER] No user available, aborting message handling.');
+        return;
+      }
+      console.log(`✅ [HANDLER] User obtained: ${user!.role}`);
       
       // Get or create session with fallback
       console.log('🔄 [HANDLER] Getting/creating session...');
@@ -154,28 +164,40 @@ export class MessageHandler {
       const interactiveData = message.interactive;
       const imageData = message.image;
 
-      console.log(`👤 [HANDLER] User: ${user.role}, Phone: ${normalizedPhone}`);
+      console.log(`👤 [HANDLER] User: ${user!.role}, Phone: ${normalizedPhone}`);
       console.log(`💬 [HANDLER] Message: "${messageText}"`);
       console.log(`📸 [HANDLER] Has Image: ${!!imageData}`);
       console.log(`🎯 [HANDLER] Session: ${session.intent || 'none'}, Step: ${session.step || 'none'}`);
 
       // Route to appropriate flow based on user role
-      console.log(`🚦 [HANDLER] Routing to ${user.role} flow...`);
-      if (user.role === 'employee') {
+      console.log(`🚦 [HANDLER] Routing to ${user!.role} flow...`);
+      if (user!.role === 'employee') {
         await this.employeeFlow.handleMessage(
-          user, 
+          user!, 
+          session, 
+          messageText, 
+          interactiveData,
+          imageData
+        );
+      } else if (user!.role === 'customer') {
+        await this.customerFlow.handleMessage(
+          user!, 
+          session, 
+          messageText, 
+          interactiveData
+        );
+      } else if (user!.role === 'admin') {
+        await this.adminFlow.handleMessage(
+          user!, 
           session, 
           messageText, 
           interactiveData,
           imageData
         );
       } else {
-        await this.customerFlow.handleMessage(
-          user, 
-          session, 
-          messageText, 
-          interactiveData
-        );
+        // Unknown role fallback
+        console.error(`❌ [HANDLER] Unknown user role: ${user!.role}`);
+        return;
       }
       console.log('✅ [HANDLER] Flow handling completed');
 
@@ -188,9 +210,13 @@ export class MessageHandler {
       // Send error message to user
       try {
         const user = await this.userService.getUserByPhone(normalizePhoneNumber(phone));
-        const errorMessage = user?.role === 'employee' 
-          ? "માફ કરશો, તમારા મેસેજને પ્રોસેસ કરવામાં ભૂલ થઈ. કૃપા કરીને ફરીથી પ્રયાસ કરો અથવા મદદ માટે 'મદદ' ટાઈપ કરો."
-          : "Sorry, I encountered an error processing your message. Please try again or type 'help' for assistance.";
+        let errorMessage = "Sorry, I encountered an error processing your message. Please try again or type 'help' for assistance.";
+        
+        if (user?.role === 'employee') {
+          errorMessage = "માફ કરશો, તમારા મેસેજને પ્રોસેસ કરવામાં ભૂલ થઈ. કૃપા કરીને ફરીથી પ્રયાસ કરો અથવા મદદ માટે 'મદદ' ટાઈપ કરો.";
+        } else if (user?.role === 'admin') {
+          errorMessage = "🔧 Admin: System error occurred. Check logs or type 'help' for admin commands.";
+        }
         
         await whatsappService.sendTextMessage(
           normalizePhoneNumber(phone),

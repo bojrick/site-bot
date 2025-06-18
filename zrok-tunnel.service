@@ -10,7 +10,7 @@ WorkingDirectory=/home/bojrick/reeva-whatsapp-crm-erp/site-bot
 Environment="HOME=/home/bojrick"
 Environment="ZROK_API_ENDPOINT=https://api-v1.zrok.io"
 ExecStartPre=/bin/sleep 10
-ExecStart=/usr/bin/zrok share public localhost:3011 --headless
+ExecStart=/usr/bin/zrok share reserved suvasam --headless
 Restart=always
 RestartSec=10
 StandardOutput=append:/home/bojrick/reeva-whatsapp-crm-erp/site-bot/zrok.log

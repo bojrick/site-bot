@@ -8,6 +8,41 @@
       "when": 1748581020118,
       "tag": "0000_milky_black_cat",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1749551827448,
+      "tag": "0001_lowly_malice",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1749554282663,
+      "tag": "0002_slim_cerebro",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1749560612625,
+      "tag": "0003_free_the_phantom",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1750052377889,
+      "tag": "0004_watery_mongoose",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1750074562302,
+      "tag": "0005_mysterious_dakota_north",
+      "breakpoints": true
     }
   ]
 }
