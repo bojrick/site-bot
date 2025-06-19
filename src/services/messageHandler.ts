@@ -3,10 +3,11 @@ import { users, sessions, employee_otps, message_logs } from '../db/schema';
 import { eq } from 'drizzle-orm';
 import { whatsappService, ImageMessage } from './whatsapp';
 import { UserService } from './userService';
-import { EmployeeFlow } from './flows/employeeFlow';
+import { EmployeeFlowOrchestrator } from './flows/employee/EmployeeFlowOrchestrator';
 import { CustomerFlow } from './flows/customerFlow';
 import { AdminFlow } from './flows/adminFlow';
 import { normalizePhoneNumber } from '../utils/phone';
+import { InventoryFlow } from './flows/inventoryFlow';
 
 export interface WhatsAppMessage {
   id: string;
@@ -39,23 +40,58 @@ async function withTimeout<T>(promise: Promise<T>, timeoutMs: number, operation:
     return result;
   } catch (error) {
     clearTimeout(timeoutId!);
-    console.error(`❌ [TIMEOUT] ${operation} failed:`, error);
+    // Only log timeout errors as warnings, not errors, since we have fallbacks
+    if (error instanceof Error && error.message.includes('timed out')) {
+      console.warn(`⏰ [TIMEOUT] ${operation} timed out, using fallback`);
+    } else {
+      console.error(`❌ [ERROR] ${operation} failed:`, error);
+    }
     return null;
   }
 }
 
+// Retry wrapper for critical operations
+async function withRetry<T>(
+  promiseFactory: () => Promise<T>, 
+  maxRetries: number, 
+  operation: string,
+  timeoutMs: number = 10000
+): Promise<T | null> {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const result = await withTimeout(promiseFactory(), timeoutMs, `${operation} (attempt ${attempt})`);
+      if (result !== null) {
+        return result;
+      }
+    } catch (error) {
+      console.warn(`⏰ [RETRY] ${operation} attempt ${attempt}/${maxRetries} failed`);
+    }
+    
+    if (attempt < maxRetries) {
+      // Exponential backoff: wait 1s, 2s, 4s...
+      const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+  
+  console.error(`❌ [RETRY] ${operation} failed after ${maxRetries} attempts`);
+  return null;
+}
+
 export class MessageHandler {
   private userService: UserService;
-  private employeeFlow: EmployeeFlow;
+  private employeeOrchestrator: EmployeeFlowOrchestrator;
   private customerFlow: CustomerFlow;
   private adminFlow: AdminFlow;
+  private inventoryFlow: InventoryFlow;
 
   constructor() {
     console.log('🏗️ [HANDLER] Initializing MessageHandler...');
     this.userService = new UserService();
-    this.employeeFlow = new EmployeeFlow();
+    this.employeeOrchestrator = new EmployeeFlowOrchestrator();
     this.customerFlow = new CustomerFlow();
     this.adminFlow = new AdminFlow();
+    this.inventoryFlow = new InventoryFlow();
   }
 
   async handleMessage(phone: string, message: WhatsAppMessage): Promise<void> {
@@ -65,11 +101,11 @@ export class MessageHandler {
       const normalizedPhone = normalizePhoneNumber(phone);
       console.log(`📱 [HANDLER] Normalized phone: ${normalizedPhone}`);
       
-      // Test database connection with timeout
+      // Test database connection with longer timeout
       console.log('🗄️ [HANDLER] Testing database connection...');
       const dbConnected = await withTimeout(
         this.testDbConnection(),
-        3000,
+        8000, // Increased from 3000ms to 8000ms
         'Database connection test'
       );
       
@@ -77,30 +113,31 @@ export class MessageHandler {
         console.warn('⚠️ [HANDLER] Database not available, continuing without DB features');
       }
       
-      // Log the message (with timeout, non-blocking)
+      // Log the message (with timeout, non-blocking) - not critical so keep shorter timeout
       if (dbConnected) {
         console.log('📝 [HANDLER] Logging message...');
         await withTimeout(
           this.logMessage(normalizedPhone, 'inbound', message),
-          2000,
+          5000, // Increased from 2000ms to 5000ms
           'Message logging'
         );
       }
 
-      // Mark message as read (continue even if it fails)
+      // Mark message as read with longer timeout for WhatsApp API (continue even if it fails)
       console.log('👁️ [HANDLER] Marking message as read...');
       await withTimeout(
         whatsappService.markAsRead(message.id),
-        2000,
+        10000, // Increased from 2000ms to 10000ms for external API
         'Mark as read'
       );
 
-      // Get or create user with fallback
+      // Get or create user with retry for critical operation
       console.log('👤 [HANDLER] Getting/creating user...');
-      let user = await withTimeout(
-        this.userService.getOrCreateUser(normalizedPhone),
-        3000,
-        'Get/create user'
+      let user = await withRetry(
+        () => this.userService.getOrCreateUser(normalizedPhone),
+        2, // 2 retries
+        'Get/create user',
+        10000 // 10 second timeout per attempt
       );
       
       // If database failed, create a temporary user object
@@ -109,15 +146,16 @@ export class MessageHandler {
         user = {
           id: 'temp-' + normalizedPhone,
           phone: normalizedPhone,
-          role: 'customer',
-          name: 'Guest',
+          role: 'customer' as 'customer' | 'employee' | 'admin',
+          name: null,
           email: null,
           is_verified: false,
           verified_at: null,
           created_at: new Date(),
           updated_at: new Date(),
           introduction_sent: false,
-          introduction_sent_at: null
+          introduction_sent_at: null,
+          details: null
         };
       }
       // Null check before using user.role
@@ -127,21 +165,23 @@ export class MessageHandler {
       }
       console.log(`✅ [HANDLER] User obtained: ${user!.role}`);
       
-      // Get or create session with fallback
+      // Get or create session with retry for critical operation
       console.log('🔄 [HANDLER] Getting/creating session...');
       let session = null;
       if (dbConnected) {
-        session = await withTimeout(
-          this.getSession(normalizedPhone),
-          2000,
-          'Get session'
+        session = await withRetry(
+          () => this.getSession(normalizedPhone),
+          2, // 2 retries
+          'Get session',
+          8000 // 8 second timeout per attempt
         );
         if (!session) {
           console.log('🆕 [HANDLER] Creating new session...');
-          session = await withTimeout(
-            this.createSession(normalizedPhone),
-            2000,
-            'Create session'
+          session = await withRetry(
+            () => this.createSession(normalizedPhone),
+            2, // 2 retries
+            'Create session',
+            8000 // 8 second timeout per attempt
           );
         }
       }
@@ -172,7 +212,7 @@ export class MessageHandler {
       // Route to appropriate flow based on user role
       console.log(`🚦 [HANDLER] Routing to ${user!.role} flow...`);
       if (user!.role === 'employee') {
-        await this.employeeFlow.handleMessage(
+        await this.employeeOrchestrator.handleMessage(
           user!, 
           session, 
           messageText, 
@@ -209,7 +249,20 @@ export class MessageHandler {
       
       // Send error message to user
       try {
-        const user = await this.userService.getUserByPhone(normalizePhoneNumber(phone));
+        // If we have a user object from the main flow, use it; otherwise try to get user with timeout
+        let user = null;
+        if (arguments[1] && typeof arguments[1] === 'object') {
+          // Try to extract user from the current context if available
+          user = arguments[1];
+        } else {
+          // Only try to get user if database seems available, with a short timeout
+          user = await withTimeout(
+            this.userService.getUserByPhone(normalizePhoneNumber(phone)),
+            3000,
+            'Get user for error message'
+          );
+        }
+        
         let errorMessage = "Sorry, I encountered an error processing your message. Please try again or type 'help' for assistance.";
         
         if (user?.role === 'employee') {
@@ -218,9 +271,11 @@ export class MessageHandler {
           errorMessage = "🔧 Admin: System error occurred. Check logs or type 'help' for admin commands.";
         }
         
-        await whatsappService.sendTextMessage(
-          normalizePhoneNumber(phone),
-          errorMessage
+        // Use a longer timeout for WhatsApp API call
+        await withTimeout(
+          whatsappService.sendTextMessage(normalizePhoneNumber(phone), errorMessage),
+          10000,
+          'Send error message'
         );
       } catch (sendError) {
         console.error('❌ [HANDLER] Error sending error message:', sendError);
@@ -313,17 +368,19 @@ export class MessageHandler {
         metadata: { timestamp: message.timestamp },
       });
     } catch (error) {
-      console.error('Error logging message:', error);
+      // Don't throw errors for logging failures - it's not critical
+      console.warn('📝 [LOG] Message logging failed (non-critical):', error instanceof Error ? error.message : String(error));
     }
   }
 
   private async testDbConnection(): Promise<boolean> {
     try {
       const db = getDb();
-      // Simple query to test connection
-      await db.select().from(sessions).limit(1);
+      // Simple and fast query to test connection - just get count
+      const result = await db.select().from(sessions).limit(1);
       return true;
     } catch (error) {
+      console.warn('🗄️ [DB] Database connection test failed:', error instanceof Error ? error.message : String(error));
       return false;
     }
   }

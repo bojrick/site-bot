@@ -1,0 +1,73 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Cursor Rules for WhatsApp Bot Development
+
+## WhatsApp API Critical Constraints
+
+### ⚠️ CRITICAL: WhatsApp Button Text Length Limits
+**ALWAYS CHECK BUTTON TEXT LENGTH - This causes API errors!**
+
+- **List Message Button Labels**: Maximum 20 characters
+- **Button Message Titles**: Maximum 20 characters  
+- **Interactive Button Text**: Maximum 20 characters
+
+**Before using any button text:**
+1. Count characters in button labels
+2. Ensure all button text is ≤ 20 characters
+3. Test with WhatsApp API if unsure
+
+**Common violations to watch for:**
+- Gujarati text can be longer than it appears
+- Combined emoji + text often exceeds limit
+- Long descriptive button names
+**Fix examples:**
+- ❌ "વિગતવાર પ્રકાર પસંદ કરો" (25+ chars)
+- ✅ "પ્રકાર પસંદ કરો" (16 chars)
+- ❌ "Additional Options Here" (21 chars)  
+- ✅ "More Options" (12 chars)
+
+**Error signature to watch for:**
+```
+Parameter value is not valid
+Button label is too long. Max length is 20
+```
+
+## Admin User Employee Function Routing
+
+### ⚠️ CRITICAL: Admin Employee Function Auto-Impersonation
+**When admin users click employee function buttons, they MUST be routed to employee impersonation mode, NOT AdminFlow**
+
+**Problem Pattern:**
+1. Admin user clicks employee function button (request_materials, log_activity)
+2. System routes to AdminFlow based on user.role === 'admin' 
+3. AdminFlow shows admin control panel instead of starting employee function
+4. User gets stuck in wrong flow
+
+**Fix Applied:**
+- Added auto-detection of employee functions in AdminFlow.handleMainMenu()
+- Employee function requests automatically trigger impersonation mode
+- Functions detected: `['log_activity', 'request_materials', 'material_request']`
+
+**Code Location:**
+```typescript
+// In AdminFlow.handleMainMenu()
+const employeeFunctions = ['log_activity', 'request_materials', 'material_request'];
+if (employeeFunctions.includes(text)) {
+  await this.startEmployeeImpersonationForFunction(phone, user, text);
+  return;
+}
+```
+
+**When Adding New Employee Functions:**
+1. Add function name to `employeeFunctions` array in AdminFlow.handleMainMenu()
+2. Update function mapping in `startEmployeeImpersonationForFunction()`
+3. Test admin user clicking the function works correctly
+
+**Error Signature to Watch For:**
+```
+[ADMIN] AdminFlow.handleMessage called with: { messageText: 'request_materials' }
+// Then shows admin control panel instead of starting material request
+```

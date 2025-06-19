@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Cursor Rules for WhatsApp Bot Development
+
+## WhatsApp API Critical Constraints
+
+### ⚠️ CRITICAL: WhatsApp Button Text Length Limits
+**ALWAYS CHECK BUTTON TEXT LENGTH - This causes API errors!**
+
+- **List Message Button Labels**: Maximum 20 characters
+- **Button Message Titles**: Maximum 20 characters  
+- **Interactive Button Text**: Maximum 20 characters
+
+**Before using any button text:**
+1. Count characters in button labels
+2. Ensure all button text is ≤ 20 characters
+3. Test with WhatsApp API if unsure
+
+**Common violations to watch for:**
+- Gujarati text can be longer than it appears
+- Combined emoji + text often exceeds limit
+- Long descriptive button names
+**Fix examples:**
+- ❌ "વિગતવાર પ્રકાર પસંદ કરો" (25+ chars)
+- ✅ "પ્રકાર પસંદ કરો" (16 chars)
+- ❌ "Additional Options Here" (21 chars)  
+- ✅ "More Options" (12 chars)
+
+**Error signature to watch for:**
+```
+Parameter value is not valid
+Button label is too long. Max length is 20
+```

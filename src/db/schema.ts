@@ -165,6 +165,11 @@ export const inventory_items = pgTable("inventory_items", {
   site_id: uuid("site_id").references(() => sites.id),
   status: text("status", { enum: ["active", "inactive"] }).default("active"),
   created_by: uuid("created_by").references(() => users.id),
+  // Gujarati language support columns
+  gujarati_name: varchar("gujarati_name", { length: 255 }),
+  gujarati_unit: varchar("gujarati_unit", { length: 50 }),
+  gujarati_category: varchar("gujarati_category", { length: 100 }),
+  item_code: varchar("item_code", { length: 50 }), // Optional item code for reference
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
 });
@@ -179,8 +184,25 @@ export const inventory_transactions = pgTable("inventory_transactions", {
   previous_stock: integer("previous_stock").notNull(),
   new_stock: integer("new_stock").notNull(),
   notes: text("notes"),
+  // Image support for Gujarati flow (mandatory image uploads)
+  image_url: text("image_url"), // Cloudflare R2 public URL
+  image_key: text("image_key"), // R2 object key for management
   created_by: uuid("created_by").references(() => users.id),
   created_at: timestamp("created_at").defaultNow(),
+});
+
+// User site assignments for employee access control
+export const user_site_assignments = pgTable("user_site_assignments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  user_id: uuid("user_id").references(() => users.id).notNull(),
+  site_id: uuid("site_id").references(() => sites.id).notNull(),
+  role: text("role", { enum: ["manager", "supervisor", "worker", "admin"] }).default("worker"),
+  permissions: jsonb("permissions").default([]), // Array of permission strings
+  status: text("status", { enum: ["active", "inactive", "suspended"] }).default("active"),
+  assigned_by: uuid("assigned_by").references(() => users.id),
+  notes: text("notes"),
+  created_at: timestamp("created_at").defaultNow(),
+  updated_at: timestamp("updated_at").defaultNow(),
 });
 
 // Export types for TypeScript
@@ -203,4 +225,6 @@ export type NewCustomerInquiry = typeof customer_inquiries.$inferInsert;
 export type InventoryItem = typeof inventory_items.$inferSelect;
 export type NewInventoryItem = typeof inventory_items.$inferInsert;
 export type InventoryTransaction = typeof inventory_transactions.$inferSelect;
-export type NewInventoryTransaction = typeof inventory_transactions.$inferInsert; 
+export type NewInventoryTransaction = typeof inventory_transactions.$inferInsert;
+export type UserSiteAssignment = typeof user_site_assignments.$inferSelect;
+export type NewUserSiteAssignment = typeof user_site_assignments.$inferInsert; 

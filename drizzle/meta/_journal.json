@@ -43,6 +43,13 @@
       "when": 1750074562302,
       "tag": "0005_mysterious_dakota_north",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1750340706169,
+      "tag": "0006_white_mantis",
+      "breakpoints": true
     }
   ]
 }

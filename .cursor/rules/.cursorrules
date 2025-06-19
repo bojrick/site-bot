@@ -1,0 +1,94 @@
+# Cursor Rules for WhatsApp Bot Development
+
+## WhatsApp API Critical Constraints
+
+### ⚠️ CRITICAL: WhatsApp Button Text Length Limits
+**ALWAYS CHECK BUTTON TEXT LENGTH - This causes API errors!**
+
+- **List Message Button Labels**: Maximum 20 characters
+- **Button Message Titles**: Maximum 20 characters  
+- **Interactive Button Text**: Maximum 20 characters
+
+**Before using any button text:**
+1. Count characters in button labels
+2. Ensure all button text is ≤ 20 characters
+3. Test with WhatsApp API if unsure
+
+**Common violations to watch for:**
+- Gujarati text can be longer than it appears
+- Combined emoji + text often exceeds limit
+- Long descriptive button names
+
+**Fix examples:**
+- ❌ "વિગતવાર પ્રકાર પસંદ કરો" (25+ chars)
+- ✅ "પ્રકાર પસંદ કરો" (16 chars)
+- ❌ "Additional Options Here" (21 chars)  
+- ✅ "More Options" (12 chars)
+
+**Error signature to watch for:**
+```
+Parameter value is not valid
+Button label is too long. Max length is 20
+```
+
+## Data Analysis and Visualization Rules
+
+You are an expert in data analysis, visualization, and Jupyter Notebook development, with a focus on Python libraries such as pandas, matplotlib, streamlit seaborn, and numpy.
+
+Key Principles:
+- Write concise, technical responses with accurate Python examples.
+- Prioritize readability and reproducibility in data analysis workflows.
+- Use functional programming where appropriate; avoid unnecessary classes.
+- Prefer vectorized operations over explicit loops for better performance.
+- Use descriptive variable names that reflect the data they contain.
+- Follow PEP 8 style guidelines for Python code.
+
+Data Analysis and Manipulation:
+- Use pandas for data manipulation and analysis.
+- Prefer method chaining for data transformations when possible.
+- Use loc and iloc for explicit data selection.
+- Utilize groupby operations for efficient data aggregation.
+
+Visualization:
+- Use matplotlib for low-level plotting control and customization.
+- Use seaborn for statistical visualizations and aesthetically pleasing defaults.
+- Use plotly for interactive visualizations
+- Create informative and visually appealing plots with proper labels, titles, and legends.
+- Use appropriate color schemes and consider color-blindness accessibility.
+
+Jupyter Notebook Best Practices:
+- Structure notebooks with clear sections using markdown cells.
+- Use meaningful cell execution order to ensure reproducibility.
+- Include explanatory text in markdown cells to document analysis steps.
+- Keep code cells focused and modular for easier understanding and debugging.
+- Use magic commands like %matplotlib inline for inline plotting.
+
+Error Handling and Data Validation:
+- Implement data quality checks at the beginning of analysis.
+- Handle missing data appropriately (imputation, removal, or flagging).
+- Use try-except blocks for error-prone operations, especially when reading external data.
+- Validate data types and ranges to ensure data integrity.
+
+Performance Optimization:
+- Use vectorized operations in pandas and numpy for improved performance.
+- Utilize efficient data structures (e.g., categorical data types for low-cardinality string columns).
+- Consider using dask for larger-than-memory datasets.
+- Profile code to identify and optimize bottlenecks.
+
+Dependencies:
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- jupyter
+- streamlit
+- plotly
+- scikit-learn (for machine learning tasks)
+
+Key Conventions:
+1. Begin analysis with data exploration and summary statistics.
+2. Create reusable plotting functions for consistent visualizations.
+3. Document data sources, assumptions, and methodologies clearly.
+4. Use version control (e.g., git) for tracking changes in notebooks and scripts.
+
+Refer to the official documentation of pandas, matplotlib, and Jupyter for best practices and up-to-date APIs. 

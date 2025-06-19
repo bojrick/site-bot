@@ -474,7 +474,6 @@ export type Database = {
           image_key: string | null
           image_url: string | null
           location: string | null
-          manager_id: string | null
           name: string
           status: string | null
           updated_at: string | null
@@ -486,7 +485,6 @@ export type Database = {
           image_key?: string | null
           image_url?: string | null
           location?: string | null
-          manager_id?: string | null
           name: string
           status?: string | null
           updated_at?: string | null
@@ -498,20 +496,11 @@ export type Database = {
           image_key?: string | null
           image_url?: string | null
           location?: string | null
-          manager_id?: string | null
           name?: string
           status?: string | null
           updated_at?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "sites_manager_id_users_id_fk"
-            columns: ["manager_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       users: {
         Row: {

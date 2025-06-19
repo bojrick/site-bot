@@ -1,13 +1,16 @@
 import { getDb } from '../../db';
 import { sessions, users, sites, inventory_items, inventory_transactions } from '../../db/schema';
 import { eq, desc, and, sql } from 'drizzle-orm';
-import { whatsappService } from '../whatsapp';
+import { whatsappService, ImageMessage } from '../whatsapp';
 import PDFDocument from 'pdfkit';
 import { Readable } from 'stream';
 import { r2Service } from '../cloudflareR2';
+import process from 'process';
 
 export class InventoryFlow {
   private readonly ADMIN_ROLE = 'admin';
+  private readonly MAX_UPLOAD_RETRIES = 2;
+  private readonly UPLOAD_TIMEOUT_MS = 30000; // 30 seconds
 
   async updateSession(phone: string, updates: Partial<typeof sessions.$inferInsert>) {
     try {
@@ -42,7 +45,8 @@ export class InventoryFlow {
     user: any,
     session: any,
     messageText: string,
-    interactiveData?: any
+    interactiveData?: any,
+    imageData?: ImageMessage
   ) {
     const phone = user.phone;
     
@@ -50,6 +54,7 @@ export class InventoryFlow {
       phone,
       messageText,
       interactiveData,
+      imageData,
       sessionIntent: session.intent,
       sessionStep: session.step,
       sessionData: session.data
@@ -65,13 +70,13 @@ export class InventoryFlow {
 
     // Handle main inventory flow
     if (session.intent === 'inventory_management') {
-      await this.handleInventoryFlow(phone, session, messageText, interactiveData, user);
+      await this.handleInventoryFlow(phone, session, messageText, interactiveData, user, imageData);
     } else {
       await this.showInventoryMainMenu(phone, user);
     }
   }
 
-  private async handleInventoryFlow(phone: string, session: any, messageText: string, interactiveData?: any, user?: any) {
+  private async handleInventoryFlow(phone: string, session: any, messageText: string, interactiveData?: any, user?: any, imageData?: ImageMessage) {
     const text = messageText.toLowerCase().trim();
     const step = session.step;
     const data = session.data || {};
@@ -117,11 +122,17 @@ export class InventoryFlow {
       case 'item_in_quantity':
         await this.handleItemInQuantity(phone, messageText, data);
         break;
+      case 'item_in_upload_image':
+        await this.handleImageUpload(phone, data, messageText, imageData, 'inventory-in', 'Stock In Image', this.completeItemIn.bind(this));
+        break;
       case 'item_out_select':
         await this.handleItemOutSelect(phone, messageText, data, interactiveData);
         break;
       case 'item_out_quantity':
         await this.handleItemOutQuantity(phone, messageText, data);
+        break;
+      case 'item_out_upload_image':
+        await this.handleImageUpload(phone, data, messageText, imageData, 'inventory-out', 'Stock Out Image', this.completeItemOut.bind(this));
         break;
       case 'new_item_name':
         await this.handleNewItemName(phone, messageText, data);
@@ -432,8 +443,30 @@ Select what you'd like to do:`;
       return;
     }
 
+    await this.updateSession(phone, {
+      intent: 'inventory_management',
+      step: 'item_in_upload_image',
+      data: { 
+        ...data,
+        quantity,
+        upload_retry_count: 0
+      }
+    });
+
+    await whatsappService.sendTextMessage(phone, 
+      `📸 *Upload Stock In Image*\n\n` +
+      `Please upload an image of the stock being added:\n\n` +
+      `• Photo of the materials received\n` +
+      `• Stock location or storage area\n` +
+      `• Any relevant documentation\n\n` +
+      `Upload an image or type 'skip' to continue without image:`
+    );
+  }
+
+  private async completeItemIn(phone: string, itemInData: any) {
     try {
-      const item = data.selected_item;
+      const item = itemInData.selected_item;
+      const quantity = itemInData.quantity;
       const currentStock = item.current_stock ?? 0;
       const newStock = currentStock + quantity;
       
@@ -446,7 +479,7 @@ Select what you'd like to do:`;
         })
         .where(eq(inventory_items.id, item.id));
 
-      // Record transaction
+      // Record transaction with image info
       await getDb()
         .insert(inventory_transactions)
         .values({
@@ -456,16 +489,18 @@ Select what you'd like to do:`;
           quantity: quantity,
           previous_stock: currentStock,
           new_stock: newStock,
-          notes: `Admin added ${quantity} ${item.unit}`,
-          created_by: data.user_id || null
+          notes: `Admin added ${quantity} ${item.unit}${itemInData.image_info ? ' with image' : ''}`,
+          created_by: itemInData.user_id || null
         });
 
+      const imageStatus = itemInData.image_info ? '📸 with image' : '📝 without image';
       await whatsappService.sendTextMessage(phone, 
         `✅ *Stock Added Successfully!*\n\n` +
         `Item: ${item.name}\n` +
         `Added: ${quantity} ${item.unit}\n` +
         `Previous Stock: ${currentStock} ${item.unit}\n` +
-        `New Stock: ${newStock} ${item.unit}\n\n` +
+        `New Stock: ${newStock} ${item.unit}\n` +
+        `Status: ${imageStatus}\n\n` +
         `Transaction recorded at ${new Date().toLocaleString()}`
       );
 
@@ -645,7 +680,31 @@ Select what you'd like to do:`;
       return;
     }
 
+    await this.updateSession(phone, {
+      intent: 'inventory_management',
+      step: 'item_out_upload_image',
+      data: { 
+        ...data,
+        quantity,
+        upload_retry_count: 0
+      }
+    });
+
+    await whatsappService.sendTextMessage(phone, 
+      `📸 *Upload Stock Out Image*\n\n` +
+      `Please upload an image of the stock being removed:\n\n` +
+      `• Photo of materials being taken out\n` +
+      `• Delivery or usage location\n` +
+      `• Any relevant documentation\n\n` +
+      `Upload an image or type 'skip' to continue without image:`
+    );
+  }
+
+  private async completeItemOut(phone: string, itemOutData: any) {
     try {
+      const item = itemOutData.selected_item;
+      const quantity = itemOutData.quantity;
+      const currentStock = item.current_stock ?? 0;
       const newStock = currentStock - quantity;
       
       // Update item stock
@@ -657,7 +716,7 @@ Select what you'd like to do:`;
         })
         .where(eq(inventory_items.id, item.id));
 
-      // Record transaction
+      // Record transaction with image info
       await getDb()
         .insert(inventory_transactions)
         .values({
@@ -667,16 +726,18 @@ Select what you'd like to do:`;
           quantity: quantity,
           previous_stock: currentStock,
           new_stock: newStock,
-          notes: `Admin removed ${quantity} ${item.unit}`,
-          created_by: data.user_id || null
+          notes: `Admin removed ${quantity} ${item.unit}${itemOutData.image_info ? ' with image' : ''}`,
+          created_by: itemOutData.user_id || null
         });
 
+      const imageStatus = itemOutData.image_info ? '📸 with image' : '📝 without image';
       await whatsappService.sendTextMessage(phone, 
         `✅ *Stock Removed Successfully!*\n\n` +
         `Item: ${item.name}\n` +
         `Removed: ${quantity} ${item.unit}\n` +
         `Previous Stock: ${currentStock} ${item.unit}\n` +
-        `New Stock: ${newStock} ${item.unit}\n\n` +
+        `New Stock: ${newStock} ${item.unit}\n` +
+        `Status: ${imageStatus}\n\n` +
         `Transaction recorded at ${new Date().toLocaleString()}`
       );
 
@@ -1685,5 +1746,111 @@ Select what you'd like to do:`;
       `💡 *${categoryName} Examples:*\n${examples}\n\n` +
       `*Type the item name:*`
     );
+  }
+
+  // Image upload handler similar to employeeFlow.ts
+  private async handleImageUpload(
+    phone: string, 
+    currentData: any, 
+    messageText: string, 
+    imageData?: ImageMessage,
+    folderName: string = 'inventory',
+    photoDescription: string = 'Inventory Image',
+    completionHandler?: (phone: string, data: any) => Promise<void>
+  ) {
+    const retryCount = currentData.upload_retry_count || 0;
+    
+    if (imageData) {
+      // Validate image before upload
+      if (!this.validateImageData(imageData)) {
+        await whatsappService.sendTextMessage(phone, "❌ Invalid image format. Please upload JPEG or PNG image or type 'skip'.");
+        return;
+      }
+
+      await whatsappService.sendTextMessage(phone, `📤 Uploading ${photoDescription}...`);
+      
+      try {
+        // Set timeout for upload
+        const uploadPromise = r2Service.uploadFromWhatsAppMedia(
+          imageData.id,
+          process.env.META_WHATSAPP_TOKEN!,
+          folderName
+        );
+        
+        const timeoutPromise = new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error('Upload timeout')), this.UPLOAD_TIMEOUT_MS)
+        );
+        
+        const uploadResult = await Promise.race([uploadPromise, timeoutPromise]);
+        
+        if (uploadResult.success) {
+          const imageInfo = {
+            url: uploadResult.url,
+            key: uploadResult.key,
+            caption: imageData.caption || photoDescription,
+            whatsapp_media_id: imageData.id,
+            mime_type: imageData.mime_type,
+            sha256: imageData.sha256
+          };
+          
+          await whatsappService.sendTextMessage(phone, "✅ Image uploaded successfully!");
+          
+          if (completionHandler) {
+            await completionHandler(phone, { ...currentData, image_info: imageInfo });
+          }
+        } else {
+          throw new Error(uploadResult.error || 'Unknown upload error');
+        }
+        
+      } catch (error) {
+        console.error('R2 upload error:', error);
+        
+        if (retryCount < this.MAX_UPLOAD_RETRIES) {
+          // Allow retry
+          await this.updateSession(phone, {
+            data: { ...currentData, upload_retry_count: retryCount + 1 }
+          });
+          
+          const errorMessage = error instanceof Error && error.message === 'Upload timeout' 
+            ? "⏰ Upload timeout occurred."
+            : "❌ Error uploading image.";
+            
+          await whatsappService.sendTextMessage(phone, 
+            `${errorMessage} Please try again (${retryCount + 1}/${this.MAX_UPLOAD_RETRIES + 1}) or type 'skip'.`
+          );
+        } else {
+          // Max retries reached
+          await whatsappService.sendTextMessage(phone, 
+            "❌ Repeated upload failures. Type 'skip' to continue without image or try again later."
+          );
+        }
+        return;
+      }
+      
+    } else if (messageText.toLowerCase() === 'skip') {
+      if (completionHandler) {
+        await completionHandler(phone, { ...currentData, image_info: null });
+      }
+    } else {
+      await whatsappService.sendTextMessage(phone, "Please upload an image or type 'skip':");
+      return;
+    }
+  }
+
+  // Image validation helper
+  private validateImageData(imageData: ImageMessage): boolean {
+    if (!imageData || !imageData.id) {
+      return false;
+    }
+    
+    // Check MIME type if available
+    if (imageData.mime_type) {
+      const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+      if (!validTypes.includes(imageData.mime_type.toLowerCase())) {
+        return false;
+      }
+    }
+    
+    return true;
   }
 } 

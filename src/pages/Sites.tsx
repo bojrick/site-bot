@@ -32,19 +32,43 @@ const Sites = () => {
   const { data: sites, isLoading } = useQuery({
     queryKey: ['sites'],
     queryFn: async () => {
-      const { data, error } = await supabase
+      // First get all sites
+      const { data: sitesData, error: sitesError } = await supabase
         .from('sites')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (sitesError) throw sitesError;
+
+      // Then get managers for each site from user_site_assignments
+      const { data: assignmentsData, error: assignmentsError } = await supabase
+        .from('user_site_assignments')
         .select(`
-          *,
-          manager:manager_id (
+          site_id,
+          role,
+          users!inner (
             name,
             phone
           )
         `)
-        .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      return data || [];
+        .eq('status', 'active')
+        .eq('role', 'manager');
+
+      if (assignmentsError) throw assignmentsError;
+
+      // Combine sites with their managers
+      const sitesWithManagers = sitesData?.map(site => {
+        const managers = assignmentsData?.filter(assignment => assignment.site_id === site.id) || [];
+        const primaryManager = managers[0]?.users;
+        
+        return {
+          ...site,
+          manager: primaryManager,
+          managerCount: managers.length
+        };
+      }) || [];
+
+      return sitesWithManagers;
     }
   });
 
@@ -221,7 +245,7 @@ const Sites = () => {
                 <TableHead>Image</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Location</TableHead>
-                <TableHead>Manager</TableHead>
+                <TableHead>Manager(s)</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Created</TableHead>
                 <TableHead>Actions</TableHead>
@@ -246,7 +270,17 @@ const Sites = () => {
                   <TableCell className="font-medium">{site.name}</TableCell>
                   <TableCell>{site.location || 'N/A'}</TableCell>
                   <TableCell>
-                    {site.manager?.name || site.manager?.phone || 'Unassigned'}
+                    {site.manager ? (
+                      <div className="flex flex-col">
+                        <span className="font-medium">{site.manager.name || 'No Name'}</span>
+                        <span className="text-sm text-gray-500">{site.manager.phone}</span>
+                        {site.managerCount > 1 && (
+                          <span className="text-xs text-blue-600">+{site.managerCount - 1} more</span>
+                        )}
+                      </div>
+                    ) : (
+                      <span className="text-gray-500">Unassigned</span>
+                    )}
                   </TableCell>
                   <TableCell>
                     <Badge className={getStatusColor(site.status)}>
