@@ -160,9 +160,7 @@ export const inventory_items = pgTable("inventory_items", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 255 }).notNull(),
   unit: varchar("unit", { length: 50 }).notNull(), // kg, pcs, bags, etc.
-  current_stock: integer("current_stock").default(0),
   category: varchar("category", { length: 100 }), // building_material, contractor_materials, electrical_materials
-  site_id: uuid("site_id").references(() => sites.id),
   status: text("status", { enum: ["active", "inactive"] }).default("active"),
   created_by: uuid("created_by").references(() => users.id),
   // Gujarati language support columns

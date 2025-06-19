@@ -15,6 +15,16 @@ interface CategoryConfig {
   description: string;
 }
 
+interface InventoryItemWithStock {
+  id: string;
+  name: string;
+  gujarati_name?: string;
+  unit: string;
+  gujarati_unit?: string;
+  category: string;
+  current_stock: number; // Calculated from transactions
+}
+
 export class InventoryManagementService {
   private sessionManager: SessionManager;
   private siteService: SiteContextService;
@@ -241,10 +251,35 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
         return;
       }
 
+      // Get current site context for stock calculation
+      const siteContext = await this.siteService.getCurrentSiteContext(phone);
+      if (!siteContext) {
+        await whatsappService.sendTextMessage(phone, 
+          "❌ સાઈટ માહિતી મળી નથી. કૃપા કરીને ફરીથી પ્રયાસ કરો."
+        );
+        return;
+      }
+
+      // Calculate current stock for each item for this site
+      const itemsWithStock: InventoryItemWithStock[] = await Promise.all(
+        items.map(async (item): Promise<InventoryItemWithStock> => {
+          const currentStock = await this.calculateItemStock(item.id, siteContext.siteId);
+          return {
+            id: item.id,
+            name: item.name,
+            gujarati_name: item.gujarati_name || undefined,
+            unit: item.unit,
+            gujarati_unit: item.gujarati_unit || undefined,
+            category: item.category || '',
+            current_stock: currentStock
+          };
+        })
+      );
+
       // Filter items based on operation
-      let filteredItems = items;
+      let filteredItems = itemsWithStock;
       if (operation === 'item_out') {
-        filteredItems = items.filter(item => (item.current_stock || 0) > 0);
+        filteredItems = itemsWithStock.filter(item => (item.current_stock || 0) > 0);
         if (filteredItems.length === 0) {
           await whatsappService.sendTextMessage(phone, 
             `❌ આ કેટેગરીમાં સ્ટોક ધરાવતી કોઈ આઇટમ નથી: ${category.gujarati_name}
@@ -521,7 +556,9 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
       const selectedItem = transactionData.selected_item;
       const operation = transactionData.operation;
       const quantity = transactionData.quantity!;
-      const currentStock = selectedItem.current_stock || 0;
+      
+      // Calculate current stock from transactions for this site
+      const currentStock = await this.calculateItemStock(selectedItem.id, siteContext.siteId);
 
       let newStock: number;
       let transactionType: 'in' | 'out';
@@ -534,16 +571,7 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
         transactionType = 'out';
       }
 
-      // Update item stock
-      await getDb()
-        .update(inventory_items)
-        .set({ 
-          current_stock: newStock,
-          updated_at: new Date()
-        })
-        .where(eq(inventory_items.id, selectedItem.id));
-
-      // Record transaction with image info
+      // Record transaction with image info (no need to update inventory_items table)
       await getDb()
         .insert(inventory_transactions)
         .values({
@@ -606,10 +634,47 @@ ${transactionData.notes ? `• ટિપ્પણી: ${transactionData.notes}` 
   }
 
   /**
+   * Calculate current stock for an item at a specific site from transactions
+   */
+  private async calculateItemStock(itemId: string, siteId: string): Promise<number> {
+    try {
+      const transactions = await getDb()
+        .select()
+        .from(inventory_transactions)
+        .where(and(
+          eq(inventory_transactions.item_id, itemId),
+          eq(inventory_transactions.site_id, siteId)
+        ));
+
+      let currentStock = 0;
+      for (const transaction of transactions) {
+        if (transaction.transaction_type === 'in') {
+          currentStock += transaction.quantity;
+        } else {
+          currentStock -= transaction.quantity;
+        }
+      }
+
+      return Math.max(0, currentStock); // Ensure stock is never negative
+    } catch (error) {
+      console.error('Error calculating item stock:', error);
+      return 0;
+    }
+  }
+
+  /**
    * Show stock report
    */
   private async showStockReport(phone: string): Promise<void> {
     try {
+      const siteContext = await this.siteService.getCurrentSiteContext(phone);
+      if (!siteContext) {
+        await whatsappService.sendTextMessage(phone, 
+          "❌ સાઈટ માહિતી મળી નથી. કૃપા કરીને ફરીથી પ્રયાસ કરો."
+        );
+        return;
+      }
+
       const items = await getDb()
         .select()
         .from(inventory_items)
@@ -623,11 +688,27 @@ ${transactionData.notes ? `• ટિપ્પણી: ${transactionData.notes}` 
         return;
       }
 
-      let message = `📊 *સ્ટોક રિપોર્ટ*\n\n🕒 સમય: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}\n\n`;
+      // Calculate stock for each item for the current site
+      const itemsWithStock: InventoryItemWithStock[] = await Promise.all(
+        items.map(async (item): Promise<InventoryItemWithStock> => {
+          const currentStock = await this.calculateItemStock(item.id, siteContext.siteId);
+          return {
+            id: item.id,
+            name: item.name,
+            gujarati_name: item.gujarati_name || undefined,
+            unit: item.unit,
+            gujarati_unit: item.gujarati_unit || undefined,
+            category: item.category || '',
+            current_stock: currentStock
+          };
+        })
+      );
+
+      let message = `📊 *સ્ટોક રિપોર્ટ - ${siteContext.siteName}*\n\n🕒 સમય: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}\n\n`;
 
       // Group by category
-      const groupedItems: { [key: string]: any[] } = {};
-      items.forEach(item => {
+      const groupedItems: { [key: string]: InventoryItemWithStock[] } = {};
+      itemsWithStock.forEach(item => {
         const category = item.category || 'other';
         if (!groupedItems[category]) {
           groupedItems[category] = [];
@@ -644,8 +725,8 @@ ${transactionData.notes ? `• ટિપ્પણી: ${transactionData.notes}` 
         categoryItems.forEach(item => {
           const displayName = item.gujarati_name || item.name;
           const displayUnit = item.gujarati_unit || item.unit;
-          const stockStatus = (item.current_stock || 0) > 0 ? '✅' : '❌';
-          message += `${stockStatus} ${displayName}: ${item.current_stock || 0} ${displayUnit}\n`;
+          const stockStatus = item.current_stock > 0 ? '✅' : '❌';
+          message += `${stockStatus} ${displayName}: ${item.current_stock} ${displayUnit}\n`;
         });
         
         message += '\n';
