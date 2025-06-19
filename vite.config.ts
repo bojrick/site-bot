@@ -7,7 +7,7 @@ const getComponentTagger = async () => {
   try {
     const { componentTagger } = await import("lovable-tagger");
     return componentTagger();
-  } catch (error) {
+  } catch (error: any) {
     console.warn("lovable-tagger not available:", error.message);
     return null;
   }
@@ -16,6 +16,10 @@ const getComponentTagger = async () => {
 // https://vitejs.dev/config/
 export default defineConfig(async ({ mode }) => ({
   server: {
+    host: "::",
+    port: 3001,
+  },
+  preview: {
     host: "::",
     port: 3001,
   },
