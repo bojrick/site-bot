@@ -1,5 +1,5 @@
 import { getDb } from '../../../../db';
-import { inventory_items, inventory_transactions } from '../../../../db/schema';
+import { inventory_items, inventory_transactions, sessions } from '../../../../db/schema';
 import { whatsappService, ImageMessage } from '../../../whatsapp';
 import { SessionManager, EmployeeSessionData } from '../shared/SessionManager';
 import { SiteContextService } from '../site/SiteContextService';
@@ -32,6 +32,7 @@ export class InventoryManagementService {
   
   private readonly MAX_UPLOAD_RETRIES = 2;
   private readonly UPLOAD_TIMEOUT_MS = 30000;
+  private readonly ITEMS_PER_PAGE = 8; // Leave 2 slots for navigation
 
   // Inventory categories in Gujarati
   private readonly CATEGORIES: CategoryConfig[] = [
@@ -62,12 +63,121 @@ export class InventoryManagementService {
   }
 
   /**
+   * Get database session for admin impersonation
+   */
+  private async getDbSession(phone: string): Promise<any> {
+    try {
+      const result = await getDb()
+        .select()
+        .from(sessions)
+        .where(eq(sessions.phone, phone))
+        .limit(1);
+      return result[0] || null;
+    } catch (error) {
+      console.error('Error getting database session:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Update database session for admin impersonation
+   */
+  private async updateDbSession(phone: string, updates: any): Promise<void> {
+    try {
+      const currentSession = await this.getDbSession(phone);
+      if (currentSession) {
+        const updatedData = {
+          ...currentSession.data,
+          ...updates.data
+        };
+        
+        await getDb()
+          .update(sessions)
+          .set({
+            intent: updates.intent || currentSession.intent,
+            step: updates.step || currentSession.step,
+            data: updatedData,
+            updated_at: new Date()
+          })
+          .where(eq(sessions.phone, phone));
+      }
+    } catch (error) {
+      console.error('Error updating database session:', error);
+    }
+  }
+
+  /**
+   * Get session data (works for both session types)
+   */
+  private async getSessionData(phone: string): Promise<any> {
+    // First try database session (for admin impersonation)
+    const dbSession = await this.getDbSession(phone);
+    if (dbSession?.data?.is_admin_impersonation) {
+      return dbSession;
+    }
+    
+    // Fall back to in-memory session (for regular employees)
+    return await this.sessionManager.getSession(phone);
+  }
+
+  /**
+   * Update session data (works for both session types)
+   */
+  private async updateSessionData(phone: string, updates: any): Promise<void> {
+    // Check if this is admin impersonation
+    const dbSession = await this.getDbSession(phone);
+    if (dbSession?.data?.is_admin_impersonation) {
+      await this.updateDbSession(phone, updates);
+    } else {
+      await this.sessionManager.updateSession(phone, updates);
+    }
+  }
+
+  /**
+   * Clear flow data (works for both session types)
+   */
+  private async clearFlowData(phone: string, keepSiteContext: boolean = false): Promise<void> {
+    // Check if this is admin impersonation
+    const dbSession = await this.getDbSession(phone);
+    if (dbSession?.data?.is_admin_impersonation) {
+      // For admin impersonation, just reset to the impersonation state
+      await this.updateDbSession(phone, {
+        intent: 'impersonate_employee',
+        step: 'active',
+        data: {
+          original_role: 'admin',
+          is_admin_impersonation: true,
+          selected_site: dbSession.data.selected_site,
+          site_selection_shown: true
+        }
+      });
+    } else {
+      await this.sessionManager.clearFlowData(phone, keepSiteContext);
+    }
+  }
+
+  /**
    * Start the Gujarati inventory management flow
    */
   async startFlow(phone: string): Promise<void> {
     console.log('📦 [INVENTORY-GUJARATI] Starting Gujarati inventory management flow');
     
-    await this.sessionManager.startFlow(phone, 'inventory_management_gujarati', 'select_operation');
+    // Check if this is admin impersonation by looking at the database session
+    const dbSession = await this.getDbSession(phone);
+    const isAdminImpersonation = dbSession?.data?.is_admin_impersonation || false;
+    
+    if (isAdminImpersonation) {
+      // For admin impersonation, use database session management
+      await this.updateDbSession(phone, {
+        intent: 'inventory_management_gujarati',
+        step: 'select_operation'
+      });
+      console.log('📦 [INVENTORY-GUJARATI] Using database session for admin impersonation');
+    } else {
+      // For regular employee sessions, use in-memory session management
+      await this.sessionManager.startFlow(phone, 'inventory_management_gujarati', 'select_operation');
+    }
+    
     await this.showOperationSelection(phone);
   }
 
@@ -81,14 +191,14 @@ export class InventoryManagementService {
     interactiveData?: any,
     imageData?: ImageMessage
   ): Promise<void> {
-    const session = await this.sessionManager.getSession(phone);
+    const session = await this.getSessionData(phone);
     
     if (!session) {
       console.error('📦 [INVENTORY-GUJARATI] No session found');
       return;
     }
 
-    console.log('📦 [INVENTORY-GUJARATI] Handling step:', session.step, 'with message:', messageText.substring(0, 50));
+    console.log('📦 [INVENTORY-GUJARATI] Handling step:', session.step, 'with message:', messageText.substring(0, 50), 'interactive:', !!interactiveData);
 
     switch (session.step) {
       case 'select_operation':
@@ -123,122 +233,162 @@ export class InventoryManagementService {
   }
 
   /**
-   * Show operation selection (Stock In/Out)
+   * Show operation selection using buttons
    */
   private async showOperationSelection(phone: string): Promise<void> {
     const message = `📦 *ઇન્વેન્ટરી મેનેજમેન્ટ*
 
-તમે શું કરવા માંગો છો?
+તમે શું કરવા માંગો છો?`;
 
-*નંબર ટાઈપ કરો:*
-1️⃣ સ્ટોક ઉમેરો (નવો સ્ટોક ઉમેરવા માટે)
-2️⃣ સ્ટોક કાઢો (સ્ટોક કાઢવા માટે)  
-3️⃣ નવી આઇટમ (નવી આઇટમ ઉમેરવા માટે)
-4️⃣ સ્ટોક રિપોર્ટ (વર્તમાન સ્ટોક જોવા માટે)
+    const buttons = [
+      { id: 'item_in', title: '📦 સ્ટોક ઉમેરો' },
+      { id: 'item_out', title: '📤 સ્ટોક કાઢો' },
+      { id: 'stock_report', title: '📊 સ્ટોક રિપોર્ટ' }
+    ];
 
-*કૃપા કરીને નંબર ટાઈપ કરો (1-4):*`;
-
-    await whatsappService.sendTextMessage(phone, message);
+    await whatsappService.sendButtonMessage(phone, message, buttons);
   }
 
   /**
    * Handle operation selection
    */
   private async handleOperationSelection(phone: string, messageText: string, interactiveData?: any): Promise<void> {
-    const operation = messageText.trim();
-    const session = await this.sessionManager.getSession(phone);
-    const sessionData = session?.data || {};
-
-    let operationType: string;
-    switch (operation) {
-      case '1':
-        operationType = 'item_in';
-        break;
-      case '2':
-        operationType = 'item_out';
-        break;
-      case '3':
-        operationType = 'new_item';
-        break;
-      case '4':
-        operationType = 'stock_report';
-        await this.showStockReport(phone);
-        return;
-      default:
-        await whatsappService.sendTextMessage(phone, 
-          "❌ કૃપા કરીને યોગ્ય વિકલ્પ પસંદ કરો (1-4):"
-        );
-        await this.showOperationSelection(phone);
-        return;
+    // Extract the selection properly from interactiveData or messageText
+    let selection: string;
+    
+    if (interactiveData) {
+      if (interactiveData.type === 'button_reply' && interactiveData.button_reply) {
+        selection = interactiveData.button_reply.id;
+      } else if (interactiveData.type === 'list_reply' && interactiveData.list_reply) {
+        selection = interactiveData.list_reply.id;
+      } else if (typeof interactiveData === 'string') {
+        selection = interactiveData;
+      } else {
+        selection = messageText.toLowerCase().trim();
+      }
+    } else {
+      selection = messageText.toLowerCase().trim();
     }
 
-    await this.sessionManager.updateSession(phone, {
-      step: 'select_category',
-      data: {
-        ...sessionData,
-        operation: operationType
-      }
-    });
+    console.log('📦 [INVENTORY-GUJARATI] Operation selected:', selection);
 
-    await this.showCategorySelection(phone, operationType);
+    const session = await this.getSessionData(phone);
+    const sessionData = session?.data || {};
+
+    switch (selection) {
+      case 'item_in':
+        await this.updateSessionData(phone, {
+          step: 'select_category',
+          data: {
+            ...sessionData,
+            operation: 'item_in'
+          }
+        });
+        await this.showCategorySelection(phone, 'item_in');
+        break;
+        
+      case 'item_out':
+        await this.updateSessionData(phone, {
+          step: 'select_category',
+          data: {
+            ...sessionData,
+            operation: 'item_out'
+          }
+        });
+        await this.showCategorySelection(phone, 'item_out');
+        break;
+        
+      case 'stock_report':
+        await this.showStockReport(phone);
+        return;
+        
+      default:
+        await whatsappService.sendTextMessage(phone, 
+          "❌ કૃપા કરીને યોગ્ય વિકલ્પ પસંદ કરો:"
+        );
+        await this.showOperationSelection(phone);
+        break;
+    }
   }
 
   /**
-   * Show category selection
+   * Show category selection using list message
    */
   private async showCategorySelection(phone: string, operation: string): Promise<void> {
     const operationText = this.getOperationText(operation);
     
     const message = `📂 *કેટેગરી પસંદ કરો*
 
-${operationText} માટે કઈ પ્રકારની સામગ્રી?
+${operationText} માટે કઈ પ્રકારની સામગ્રી?`;
 
-*નંબર ટાઈપ કરો:*
-1️⃣ ${this.CATEGORIES[0].gujarati_name} (${this.CATEGORIES[0].description})
-2️⃣ ${this.CATEGORIES[1].gujarati_name} (${this.CATEGORIES[1].description})
-3️⃣ ${this.CATEGORIES[2].gujarati_name} (${this.CATEGORIES[2].description})
+    const categoryRows = this.CATEGORIES.map(category => ({
+      id: category.id,
+      title: category.gujarati_name,
+      description: category.description
+    }));
 
-*કૃપા કરીને નંબર ટાઈપ કરો (1-3):*`;
-
-    await whatsappService.sendTextMessage(phone, message);
+    await whatsappService.sendListMessage(
+      phone,
+      message,
+      "કેટેગરી પસંદ કરો",
+      [{
+        title: "ઇન્વેન્ટરી કેટેગરીઓ",
+        rows: categoryRows
+      }]
+    );
   }
 
   /**
    * Handle category selection
    */
   private async handleCategorySelection(phone: string, messageText: string, interactiveData?: any): Promise<void> {
-    const categoryIndex = parseInt(messageText.trim()) - 1;
+    // Extract the category properly from interactiveData or messageText
+    let categoryId: string;
     
-    if (categoryIndex < 0 || categoryIndex >= this.CATEGORIES.length) {
+    if (interactiveData) {
+      if (interactiveData.type === 'list_reply' && interactiveData.list_reply) {
+        categoryId = interactiveData.list_reply.id;
+      } else if (typeof interactiveData === 'string') {
+        categoryId = interactiveData;
+      } else {
+        categoryId = messageText.trim();
+      }
+    } else {
+      categoryId = messageText.trim();
+    }
+
+    const selectedCategory = this.CATEGORIES.find(cat => cat.id === categoryId);
+    
+    if (!selectedCategory) {
       await whatsappService.sendTextMessage(phone, 
-        "❌ કૃપા કરીને યોગ્ય કેટેગરી પસંદ કરો (1-3):"
+        "❌ કૃપા કરીને યોગ્ય કેટેગરી પસંદ કરો:"
       );
-      const session = await this.sessionManager.getSession(phone);
+      const session = await this.getSessionData(phone);
       await this.showCategorySelection(phone, session?.data?.operation || 'item_in');
       return;
     }
 
-    const selectedCategory = this.CATEGORIES[categoryIndex];
-    const session = await this.sessionManager.getSession(phone);
+    const session = await this.getSessionData(phone);
     const sessionData = session?.data || {};
 
-    await this.sessionManager.updateSession(phone, {
+    await this.updateSessionData(phone, {
       step: 'select_item',
       data: {
         ...sessionData,
-        category: selectedCategory.id
+        category: selectedCategory.id,
+        page: 1
       }
     });
 
-    await this.showItemSelection(phone, selectedCategory, sessionData.operation);
+    await this.showItemSelection(phone, selectedCategory, sessionData.operation, 1);
   }
 
   /**
-   * Show item selection
+   * Show item selection with pagination
    */
-  private async showItemSelection(phone: string, category: CategoryConfig, operation: string): Promise<void> {
+  private async showItemSelection(phone: string, category: CategoryConfig, operation: string, page: number): Promise<void> {
     try {
-      console.log('📦 [INVENTORY-GUJARATI] Showing item selection for category:', category.id);
+      console.log('📦 [INVENTORY-GUJARATI] Showing item selection for category:', category.id, 'page:', page);
       
       const items = await this.getItemsByCategory(category.id);
       
@@ -246,7 +396,7 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
         await whatsappService.sendTextMessage(phone, 
           `❌ આ કેટેગરીમાં કોઈ આઇટમ મળી નથી: ${category.gujarati_name}
 
-નવી આઇટમ ઉમેરવા માટે ઓપશન 3 પસંદ કરો.`
+નવી આઇટમ ઉમેરવા માટે એડમિનનો સંપર્ક કરો.`
         );
         return;
       }
@@ -290,32 +440,7 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
         }
       }
 
-      const operationText = this.getOperationText(operation);
-      let message = `📦 *${category.gujarati_name} - ${operationText}*
-
-આઇટમ પસંદ કરો:
-
-`;
-
-      filteredItems.forEach((item, index) => {
-        const displayName = item.gujarati_name || item.name;
-        const displayUnit = item.gujarati_unit || item.unit;
-        message += `${index + 1}️⃣ ${displayName} (${item.current_stock || 0} ${displayUnit})\n`;
-      });
-
-      message += `\n*કૃપા કરીને નંબર ટાઈપ કરો (1-${filteredItems.length}):*`;
-
-      await whatsappService.sendTextMessage(phone, message);
-
-      // Store filtered items in session for reference
-      const session = await this.sessionManager.getSession(phone);
-      const sessionData = session?.data || {};
-      await this.sessionManager.updateSession(phone, {
-        data: {
-          ...sessionData,
-          available_items: filteredItems
-        }
-      });
+      await this.showItemListWithPagination(phone, filteredItems, category, operation, page);
 
     } catch (error) {
       console.error('Error showing item selection:', error);
@@ -326,25 +451,132 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
   }
 
   /**
+   * Show item list with pagination
+   */
+  private async showItemListWithPagination(
+    phone: string, 
+    items: InventoryItemWithStock[], 
+    category: CategoryConfig, 
+    operation: string, 
+    page: number
+  ): Promise<void> {
+    const totalPages = Math.ceil(items.length / this.ITEMS_PER_PAGE);
+    const startIndex = (page - 1) * this.ITEMS_PER_PAGE;
+    const endIndex = Math.min(startIndex + this.ITEMS_PER_PAGE, items.length);
+    const pageItems = items.slice(startIndex, endIndex);
+
+    const operationText = this.getOperationText(operation);
+    const stockText = operation === 'item_in' ? 'વર્તમાન' : 'ઉપલબ્ધ';
+
+    const itemOptions = pageItems.map(item => {
+      const displayName = item.gujarati_name || item.name;
+      const displayUnit = item.gujarati_unit || item.unit;
+      const itemTitle = displayName.length > 24 ? `${displayName.substring(0, 21)}...` : displayName;
+      
+      return {
+        id: item.id,
+        title: itemTitle,
+        description: `${stockText}: ${item.current_stock || 0} ${displayUnit}`
+      };
+    });
+
+    // Add navigation options
+    const rows = [...itemOptions];
+    
+    if (totalPages > 1) {
+      if (page > 1) {
+        rows.push({
+          id: `prev_page_${page - 1}`,
+          title: `◀️ પાછલું પાનું`,
+          description: `પાનું ${page - 1} / ${totalPages}`
+        });
+      }
+      if (page < totalPages) {
+        rows.push({
+          id: `next_page_${page + 1}`,
+          title: `▶️ આગળનું પાનું`,
+          description: `પાનું ${page + 1} / ${totalPages}`
+        });
+      }
+    }
+
+    const pageInfo = totalPages > 1 
+      ? `\n📄 પાનું ${page} / ${totalPages} (કુલ ${items.length} આઇટમ)` 
+      : `\n📦 ${items.length} આઇટમ ઉપલબ્ધ`;
+
+    await whatsappService.sendListMessage(
+      phone,
+      `📦 *${category.gujarati_name} - ${operationText}*\n\nઆઇટમ પસંદ કરો:${pageInfo}`,
+      "આઇટમ પસંદ કરો",
+      [{
+        title: category.gujarati_name,
+        rows: rows
+      }]
+    );
+
+    // Store filtered items in session for reference
+    const session = await this.getSessionData(phone);
+    const sessionData = session?.data || {};
+    await this.updateSessionData(phone, {
+      data: {
+        ...sessionData,
+        available_items: items,
+        page: page
+      }
+    });
+  }
+
+  /**
    * Handle item selection
    */
   private async handleItemSelection(phone: string, messageText: string, interactiveData?: any): Promise<void> {
-    const session = await this.sessionManager.getSession(phone);
+    // Extract the item ID properly from interactiveData or messageText
+    let itemId: string;
+    
+    if (interactiveData) {
+      if (interactiveData.type === 'list_reply' && interactiveData.list_reply) {
+        itemId = interactiveData.list_reply.id;
+      } else if (typeof interactiveData === 'string') {
+        itemId = interactiveData;
+      } else {
+        itemId = messageText.trim();
+      }
+    } else {
+      itemId = messageText.trim();
+    }
+
+    const session = await this.getSessionData(phone);
     const sessionData = session?.data || {};
     const availableItems = sessionData.available_items || [];
+    const currentPage = sessionData.page || 1;
 
-    const itemIndex = parseInt(messageText.trim()) - 1;
+    // Handle pagination
+    if (itemId.startsWith('next_page_') || itemId.startsWith('prev_page_')) {
+      const pageNumber = parseInt(itemId.split('_')[2]);
+      const category = this.CATEGORIES.find(cat => cat.id === sessionData.category);
+      
+      if (category) {
+        await this.updateSessionData(phone, {
+          data: {
+            ...sessionData,
+            page: pageNumber
+          }
+        });
+        await this.showItemSelection(phone, category, sessionData.operation, pageNumber);
+      }
+      return;
+    }
+
+    const selectedItem = availableItems.find((item: InventoryItemWithStock) => item.id === itemId);
     
-    if (itemIndex < 0 || itemIndex >= availableItems.length) {
+    if (!selectedItem) {
       await whatsappService.sendTextMessage(phone, 
-        `❌ કૃપા કરીને યોગ્ય આઇટમ પસંદ કરો (1-${availableItems.length}):`
+        "❌ કૃપા કરીને યોગ્ય આઇટમ પસંદ કરો:"
       );
       return;
     }
 
-    const selectedItem = availableItems[itemIndex];
-    
-    await this.sessionManager.updateSession(phone, {
+    await this.updateSessionData(phone, {
       step: 'enter_quantity',
       data: {
         ...sessionData,
@@ -374,7 +606,7 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
    */
   private async handleQuantityEntry(phone: string, messageText: string): Promise<void> {
     const quantity = parseInt(messageText.trim());
-    const session = await this.sessionManager.getSession(phone);
+    const session = await this.getSessionData(phone);
     const sessionData = session?.data || {};
     const selectedItem = sessionData.selected_item;
 
@@ -401,7 +633,7 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
       return;
     }
 
-    await this.sessionManager.updateSession(phone, {
+    await this.updateSessionData(phone, {
       step: 'enter_notes',
       data: {
         ...sessionData,
@@ -423,10 +655,10 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
    */
   private async handleNotesEntry(phone: string, messageText: string): Promise<void> {
     const notes = messageText.toLowerCase().trim() === 'skip' ? '' : messageText.trim();
-    const session = await this.sessionManager.getSession(phone);
+    const session = await this.getSessionData(phone);
     const sessionData = session?.data || {};
 
-    await this.sessionManager.updateSession(phone, {
+    await this.updateSessionData(phone, {
       step: 'upload_image',
       data: {
         ...sessionData,
@@ -458,7 +690,7 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
    * Handle image upload (MANDATORY)
    */
   private async handleImageUpload(phone: string, messageText: string, imageData?: ImageMessage): Promise<void> {
-    const session = await this.sessionManager.getSession(phone);
+    const session = await this.getSessionData(phone);
     const sessionData = session?.data || {};
     const retryCount = sessionData.upload_retry_count || 0;
 
@@ -512,7 +744,7 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
       console.error('Image upload error:', error);
       
       if (retryCount < this.MAX_UPLOAD_RETRIES) {
-        await this.sessionManager.updateSession(phone, {
+        await this.updateSessionData(phone, {
           data: { 
             ...sessionData,
             upload_retry_count: retryCount + 1 
@@ -588,7 +820,7 @@ ${operationText} માટે કઈ પ્રકારની સામગ્ર
         });
 
       // Clear flow data but keep site context
-      await this.sessionManager.clearFlowData(phone, true);
+      await this.clearFlowData(phone, true);
 
       const displayName = selectedItem.gujarati_name || selectedItem.name;
       const displayUnit = selectedItem.gujarati_unit || selectedItem.unit;
@@ -629,7 +861,7 @@ ${transactionData.notes ? `• ટિપ્પણી: ${transactionData.notes}` 
       errorMessage += " કૃપા કરીને ફરીથી પ્રયાસ કરો અથવા એડમિનનો સંપર્ક કરો.";
       
       await whatsappService.sendTextMessage(phone, errorMessage);
-      await this.sessionManager.clearFlowData(phone, true);
+      await this.clearFlowData(phone, true);
     }
   }
 

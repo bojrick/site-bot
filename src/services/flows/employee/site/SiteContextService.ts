@@ -1,5 +1,5 @@
 import { getDb } from '../../../../db';
-import { sites as sitesTable, users, user_site_assignments } from '../../../../db/schema';
+import { sites as sitesTable, users, user_site_assignments, sessions } from '../../../../db/schema';
 import { eq, and } from 'drizzle-orm';
 import { whatsappService } from '../../../whatsapp';
 import { SessionManager } from '../shared/SessionManager';
@@ -456,13 +456,42 @@ export class SiteContextService {
    */
   async getCurrentSiteContext(phone: string): Promise<{ siteId: string; siteName: string } | null> {
     try {
+      // First check if this is admin impersonation by looking at database session
+      const dbSession = await getDb()
+        .select()
+        .from(sessions)
+        .where(eq(sessions.phone, phone))
+        .limit(1);
+
+      const dbSessionData = dbSession[0];
+      
+      if (dbSessionData?.data && typeof dbSessionData.data === 'object') {
+        const sessionData: any = dbSessionData.data;
+        
+        // Check for admin impersonation
+        if (sessionData.is_admin_impersonation && sessionData.selected_site) {
+          console.log('👷‍♂️ [SITE-CONTEXT] Getting site context for admin impersonation:', sessionData.selected_site);
+          
+          // Get site name from database
+          const siteName = await this.getSiteName(sessionData.selected_site);
+          return {
+            siteId: sessionData.selected_site,
+            siteName: siteName
+          };
+        }
+      }
+
+      // Fall back to regular employee session in SessionManager
       const session = await this.sessionManager.getSession(phone);
       if (session?.data.selected_site_id && session?.data.selected_site_name) {
+        console.log('👷‍♂️ [SITE-CONTEXT] Getting site context from SessionManager:', session.data.selected_site_id);
         return {
           siteId: session.data.selected_site_id,
           siteName: session.data.selected_site_name
         };
       }
+      
+      console.log('👷‍♂️ [SITE-CONTEXT] No site context found for phone:', phone);
       return null;
     } catch (error) {
       console.error('Error getting current site context:', error);
@@ -471,19 +500,54 @@ export class SiteContextService {
   }
 
   /**
+   * Set site context directly (for admin impersonation)
+   */
+  async setSiteContext(phone: string, siteId: string, siteName?: string): Promise<void> {
+    try {
+      // For regular employee flows, use SessionManager
+      const actualSiteName = siteName || await this.getSiteName(siteId);
+      await this.sessionManager.setSiteContext(phone, siteId, actualSiteName);
+      
+      console.log(`[SITE-CONTEXT] Set site context for ${phone}: ${actualSiteName} (${siteId})`);
+    } catch (error) {
+      console.error('Error setting site context:', error);
+    }
+  }
+
+  /**
+   * Get site name by ID
+   */
+  private async getSiteName(siteId: string): Promise<string> {
+    try {
+      const site = await getDb()
+        .select()
+        .from(sitesTable)
+        .where(eq(sitesTable.id, siteId))
+        .limit(1);
+      
+      return site[0]?.name || 'Unknown Site';
+    } catch (error) {
+      console.error('Error getting site name:', error);
+      return 'Unknown Site';
+    }
+  }
+
+  /**
    * Check if user needs site selection
    */
-  async needsSiteSelection(user: any, phone: string): Promise<boolean> {
+  async needsSiteSelection(user: any, phone: string, session?: any): Promise<boolean> {
     try {
-      const session = await this.sessionManager.getSession(phone);
-      
-      // Admin impersonation doesn't need site selection
-      if (session?.data.is_admin_impersonation) {
-        return false;
+      // If session is passed directly (admin impersonation), use it
+      if (session?.data?.is_admin_impersonation) {
+        console.log('👷‍♂️ [SITE-CONTEXT] Admin impersonation - site already selected:', !!session.data.selected_site);
+        return !session.data.selected_site;
       }
 
+      // Regular employee flow - use SessionManager
+      const employeeSession = await this.sessionManager.getSession(phone);
+      
       // Check if site is already selected
-      return !session?.data.selected_site_id;
+      return !employeeSession?.data.selected_site_id;
     } catch (error) {
       console.error('Error checking site selection need:', error);
       return true;

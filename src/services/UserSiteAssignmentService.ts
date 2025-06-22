@@ -36,7 +36,7 @@ export interface AssignmentSummary {
       role: string;
       permissions: string[];
       status: string;
-      assigned_date: Date;
+      created_at: Date;
     };
   }>;
 }
@@ -252,7 +252,7 @@ export class UserSiteAssignmentService {
             role: assignment.role,
             permissions: assignment.permissions as string[] || [],
             status: assignment.status,
-            assigned_date: assignment.assigned_date || new Date()
+            created_at: assignment.created_at || new Date()
           }
         }))
       };
@@ -276,7 +276,7 @@ export class UserSiteAssignmentService {
       role: string;
       permissions: string[];
       status: string;
-      assigned_date: Date;
+      created_at: Date;
     };
   }>> {
     try {
@@ -303,7 +303,7 @@ export class UserSiteAssignmentService {
           role: assignment.role,
           permissions: assignment.permissions as string[] || [],
           status: assignment.status,
-          assigned_date: assignment.assigned_date || new Date()
+          created_at: assignment.created_at || new Date()
         }
       }));
     } catch (error) {

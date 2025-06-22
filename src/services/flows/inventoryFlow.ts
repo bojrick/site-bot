@@ -428,7 +428,7 @@ Select what you'd like to do:`;
 
     await whatsappService.sendTextMessage(phone, 
       `📦 *Adding stock for: ${item.name}*\n\n` +
-      `Current Stock: ${0 // TODO: Calculate from transactions} ${item.unit}\n\n` +
+      `Current Stock: ${0 /* TODO: Calculate from transactions */} ${item.unit}\n\n` +
       `Enter the quantity to add:`
     );
   }
@@ -467,7 +467,7 @@ Select what you'd like to do:`;
     try {
       const item = itemInData.selected_item;
       const quantity = itemInData.quantity;
-      const currentStock = 0 // TODO: Calculate from transactions;
+      const currentStock = 0 /* TODO: Calculate from transactions */;
       const newStock = currentStock + quantity;
       
       // Update item stock
@@ -496,9 +496,11 @@ Select what you'd like to do:`;
       const imageStatus = itemInData.image_info ? '📸 with image' : '📝 without image';
       await whatsappService.sendTextMessage(phone, 
         `✅ *Stock Added Successfully!*\n\n` +
-        `Item: ${item.name}\n` +
+        `📦 *Item: ${item.name}*\n` +
+        `📂 Category: ${this.getCategoryDisplayName(item.category)}\n` +
+        `📏 Unit: ${item.unit}\n` +
+        `Current Stock: ${currentStock} ${item.unit}\n` +
         `Added: ${quantity} ${item.unit}\n` +
-        `Previous Stock: ${currentStock} ${item.unit}\n` +
         `New Stock: ${newStock} ${item.unit}\n` +
         `Status: ${imageStatus}\n\n` +
         `Transaction recorded at ${new Date().toLocaleString()}`
@@ -538,15 +540,19 @@ Select what you'd like to do:`;
         return;
       }
 
-      // Check if any items have stock
-      const itemsWithStock = items.filter(item => (0 // TODO: Calculate from transactions) > 0);
+      // Filter items with stock for Item Out
+      const itemsWithStock = items.filter(item => {
+        // TODO: Calculate from transactions
+        return 0 > 0; // Placeholder - will be replaced with actual stock calculation
+      });
       
       if (itemsWithStock.length === 0) {
+        const categoryName = this.getCategoryDisplayName(items[0].category);
         await whatsappService.sendTextMessage(phone, 
-          "❌ *No items with stock available*\n\n" +
-          "All items have zero stock. Please add stock first using 'Item In'.\n\n" +
-          "Available items with zero stock:\n" +
-          items.slice(0, 10).map(item => `• ${item.name}: ${0 // TODO: Calculate from transactions} ${item.unit}`).join('\n') +
+          `❌ *No ${categoryName.toLowerCase()} items with stock available*\n\n` +
+          `All items have zero stock. Please add stock first using 'Item In'.\n\n` +
+          `Available items with zero stock:\n` +
+          items.slice(0, 10).map(item => `• ${item.name}: ${0 /* TODO: Calculate from transactions */} ${item.unit}`).join('\n') +
           (items.length > 10 ? `\n... and ${items.length - 10} more items` : '')
         );
         
@@ -601,7 +607,10 @@ Select what you'd like to do:`;
         allItems = await this.getActiveItems();
       }
       
-      const itemsWithStock = allItems.filter(item => (0 // TODO: Calculate from transactions) > 0);
+      const itemsWithStock = allItems.filter(item => {
+        // TODO: Calculate from transactions  
+        return 0 > 0; // Placeholder - will be replaced with actual stock calculation
+      });
       
       await this.updateSession(phone, {
         intent: 'inventory_management',
@@ -627,10 +636,15 @@ Select what you'd like to do:`;
       return;
     }
 
-    if ((0 // TODO: Calculate from transactions) <= 0) {
+    // Check if item has stock
+    const currentStock = 0; // TODO: Calculate from transactions
+    if (currentStock <= 0) {
       await whatsappService.sendTextMessage(phone, 
         `❌ *No stock available for: ${item.name}*\n\n` +
-        `Current Stock: ${0 // TODO: Calculate from transactions} ${item.unit}\n\n` +
+        `📦 *Item: ${item.name}*\n` +
+        `📂 Category: ${this.getCategoryDisplayName(item.category)}\n` +
+        `📏 Unit: ${item.unit}\n` +
+        `Current Stock: ${currentStock} ${item.unit}\n\n` +
         `You need to add stock first using 'Item In'.`
       );
       
@@ -655,7 +669,7 @@ Select what you'd like to do:`;
 
     await whatsappService.sendTextMessage(phone, 
       `📤 *Removing stock for: ${item.name}*\n\n` +
-      `Current Stock: ${0 // TODO: Calculate from transactions} ${item.unit}\n\n` +
+      `Current Stock: ${currentStock} ${item.unit}\n\n` +
       `Enter the quantity to remove:`
     );
   }
@@ -671,7 +685,7 @@ Select what you'd like to do:`;
     }
 
     const item = data.selected_item;
-    const currentStock = 0 // TODO: Calculate from transactions;
+    const currentStock = 0 /* TODO: Calculate from transactions */;
     
     if (quantity > currentStock) {
       await whatsappService.sendTextMessage(phone, 
@@ -704,7 +718,7 @@ Select what you'd like to do:`;
     try {
       const item = itemOutData.selected_item;
       const quantity = itemOutData.quantity;
-      const currentStock = 0 // TODO: Calculate from transactions;
+      const currentStock = 0 /* TODO: Calculate from transactions */;
       const newStock = currentStock - quantity;
       
       // Update item stock
@@ -733,9 +747,11 @@ Select what you'd like to do:`;
       const imageStatus = itemOutData.image_info ? '📸 with image' : '📝 without image';
       await whatsappService.sendTextMessage(phone, 
         `✅ *Stock Removed Successfully!*\n\n` +
-        `Item: ${item.name}\n` +
+        `📦 *Item: ${item.name}*\n` +
+        `📂 Category: ${this.getCategoryDisplayName(item.category)}\n` +
+        `📏 Unit: ${item.unit}\n` +
+        `Current Stock: ${currentStock} ${item.unit}\n` +
         `Removed: ${quantity} ${item.unit}\n` +
-        `Previous Stock: ${currentStock} ${item.unit}\n` +
         `New Stock: ${newStock} ${item.unit}\n` +
         `Status: ${imageStatus}\n\n` +
         `Transaction recorded at ${new Date().toLocaleString()}`
@@ -1089,7 +1105,7 @@ Select what you'd like to do:`;
             .values({
               name: item.name,
               unit: item.unit,
-              current_stock: item.stock,
+              // current_stock removed - now calculated from transactions
               // site_id: null, // Site independent items
               status: 'active',
               created_by: null,
@@ -1327,7 +1343,7 @@ Select what you'd like to do:`;
             .values({
               name: item.name,
               unit: item.unit,
-              current_stock: item.stock,
+              // current_stock removed - now calculated from transactions
               // site_id: null, // Site independent items
               status: 'active',
               created_by: null,
@@ -1464,7 +1480,7 @@ Select what you'd like to do:`;
       items.forEach((item) => {
         doc.fontSize(12);
         doc.text(item.name, 50, doc.y);
-        doc.text(0 // TODO: Calculate from transactions.toString(), 250, doc.y);
+        doc.text("0", 250, doc.y); // TODO: Calculate from transactions
         doc.text(item.unit, 350, doc.y);
         doc.moveDown();
       });
@@ -1531,7 +1547,7 @@ Select what you'd like to do:`;
     message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
 
     items.forEach((item) => {
-      message += `• ${item.name}: ${0 // TODO: Calculate from transactions} ${item.unit}\n`;
+      message += `• ${item.name}: ${0 /* TODO: Calculate from transactions */} ${item.unit}\n`;
     });
 
     message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
@@ -1627,8 +1643,11 @@ Select what you'd like to do:`;
         return;
       }
 
-      // Check if any items have stock
-      const itemsWithStock = items.filter(item => (0 // TODO: Calculate from transactions) > 0);
+      // Filter items with stock
+      const itemsWithStock = items.filter(item => {
+        // TODO: Calculate from transactions  
+        return 0 > 0; // Placeholder - will be replaced with actual stock calculation
+      });
       
       if (itemsWithStock.length === 0) {
         const categoryName = this.getCategoryDisplayName(category);
@@ -1636,7 +1655,7 @@ Select what you'd like to do:`;
           `❌ *No ${categoryName.toLowerCase()} items with stock available*\n\n` +
           `All items have zero stock. Please add stock first using 'Item In'.\n\n` +
           `Available items with zero stock:\n` +
-          items.slice(0, 10).map(item => `• ${item.name}: ${0 // TODO: Calculate from transactions} ${item.unit}`).join('\n') +
+          items.slice(0, 10).map(item => `• ${item.name}: ${0 /* TODO: Calculate from transactions */} ${item.unit}`).join('\n') +
           (items.length > 10 ? `\n... and ${items.length - 10} more items` : '')
         );
         
@@ -1692,7 +1711,7 @@ Select what you'd like to do:`;
     const itemOptions = pageItems.map(item => ({
       id: item.id,
       title: item.name.length > 24 ? `${item.name.substring(0, 21)}...` : item.name,
-      description: `${stockText}: ${0 // TODO: Calculate from transactions} ${item.unit}`
+      description: `${stockText}: ${0 /* TODO: Calculate from transactions */} ${item.unit}`
     }));
 
     // Add navigation options

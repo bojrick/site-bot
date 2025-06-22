@@ -832,18 +832,13 @@ export class MaterialRequestService {
         user_id: user.id,
         site_id: siteContext.siteId,
         material_name: materialName,
-        material_type: requestData.material_type!,
-        quantity: requestData.quantity!.toString(), // Convert decimal to string for database
+        quantity: requestData.quantity, // Keep as number, not string
         unit: requestData.unit || 'units',
-        material_specifications: materialSpecifications,
-        requested_delivery_date: deliveryDate,
-        delivery_instructions: requestData.delivery_datetime,
-        description: requestData.final_description,
+        requested_date: deliveryDate,
         urgency: 'medium', // Can be enhanced to ask user
         image_url: requestData.image_info?.url || null,
         image_key: requestData.image_info?.key || null,
-        notes: requestData.user_comments || null,
-        details: requestDetails
+        notes: requestData.user_comments || null
       }).returning();
 
       // Clear flow data but keep site context

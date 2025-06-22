@@ -1,6 +1,6 @@
 import { getDb } from '../../db';
-import { sessions, users, invoices, sites } from '../../db/schema';
-import { eq } from 'drizzle-orm';
+import { sessions, users, invoices, sites, user_site_assignments } from '../../db/schema';
+import { eq, and } from 'drizzle-orm';
 import { whatsappService, ImageMessage } from '../whatsapp';
 import { CustomerFlow } from './customerFlow';
 import { EmployeeFlow } from './employeeFlow';
@@ -266,30 +266,147 @@ First, select which site you want to work on:`;
     
     // Show site selection immediately
     setTimeout(async () => {
-      await this.showSiteSelection(phone);
+      await this.showSiteSelection(phone, user);
     }, 1000);
   }
 
-  private async showSiteSelection(phone: string) {
+  private async showSiteSelection(phone: string, user?: any) {
     try {
-      console.log('🔧 [ADMIN] Showing site selection');
+      console.log('🔧 [ADMIN] Showing site selection for user:', user?.phone);
       
-      // Fetch active sites from database
-      const sitesFromDb = await getDb()
-        .select()
-        .from(sites)
-        .where(eq(sites.status, 'active'));
+      // Get user data if not provided
+      if (!user) {
+        const userData = await getDb()
+          .select()
+          .from(users)
+          .where(eq(users.phone, phone))
+          .limit(1);
+        user = userData[0];
+      }
+
+      if (!user) {
+        await whatsappService.sendTextMessage(phone, 
+          "❌ User not found. Please try again or contact technical support."
+        );
+        return;
+      }
+
+      // For admin users, check if they have site assignments
+      // If admin has no site assignments, show all active sites (admin privilege)
+      // If admin has specific site assignments, respect those assignments
+      let sitesFromDb;
       
-      console.log('🔧 [ADMIN] Found sites in DB:', sitesFromDb.length);
+      if (user.role === 'admin') {
+        // Check if admin has specific site assignments
+        const adminAssignments = await getDb()
+          .select({
+            site: sites
+          })
+          .from(user_site_assignments)
+          .innerJoin(sites, eq(user_site_assignments.site_id, sites.id))
+          .where(
+            and(
+              eq(user_site_assignments.user_id, user.id),
+              eq(user_site_assignments.status, 'active'),
+              eq(sites.status, 'active')
+            )
+          );
+
+        if (adminAssignments.length > 0) {
+          // Admin has specific site assignments, use those
+          sitesFromDb = adminAssignments.map(assignment => assignment.site);
+          console.log('🔧 [ADMIN] Using admin-specific site assignments:', sitesFromDb.length);
+        } else {
+          // Admin has no specific assignments, show all active sites (admin privilege)
+          sitesFromDb = await getDb()
+            .select()
+            .from(sites)
+            .where(eq(sites.status, 'active'));
+          console.log('🔧 [ADMIN] Admin with no assignments, showing all sites:', sitesFromDb.length);
+        }
+      } else {
+        // For non-admin users, only show their assigned sites
+        const userAssignments = await getDb()
+          .select({
+            site: sites
+          })
+          .from(user_site_assignments)
+          .innerJoin(sites, eq(user_site_assignments.site_id, sites.id))
+          .where(
+            and(
+              eq(user_site_assignments.user_id, user.id),
+              eq(user_site_assignments.status, 'active'),
+              eq(sites.status, 'active')
+            )
+          );
+
+        sitesFromDb = userAssignments.map(assignment => assignment.site);
+        console.log('🔧 [ADMIN] Employee site assignments:', sitesFromDb.length);
+      }
       
       if (sitesFromDb.length === 0) {
         await whatsappService.sendTextMessage(phone, 
-          "❌ No active sites found in the system. Please contact admin to add sites first."
+          `❌ No active sites assigned to you. Please contact admin to assign sites first.`
         );
         await this.clearSession(phone);
         setTimeout(async () => {
           await this.showMainMenu(phone);
         }, 1000);
+        return;
+      }
+
+      // If user has only one site, auto-select it
+      if (sitesFromDb.length === 1) {
+        const singleSite = sitesFromDb[0];
+        console.log('🔧 [ADMIN] Auto-selecting single site:', singleSite.name);
+        
+        await whatsappService.sendTextMessage(phone, 
+          `✅ Auto-selected site: ${singleSite.name}\n\nNow you can use all employee functions. Type *exit* to return to admin panel.`
+        );
+
+        // Update session with selected site
+        await this.updateSession(phone, {
+          intent: 'impersonate_employee',
+          step: 'active',
+          data: {
+            site_id: singleSite.id,
+            original_role: 'admin',
+            selected_site: singleSite.id,
+            is_admin_impersonation: true
+          }
+        });
+
+        // Start employee flow directly
+        setTimeout(async () => {
+          const impersonatedUser = {
+            ...user,
+            role: 'employee',
+            is_verified: true,
+            introduction_sent: true,
+            introduction_sent_at: new Date(),
+            email: user.email ?? null,
+            verified_at: new Date(),
+            created_at: user.created_at ?? new Date(),
+            updated_at: new Date(),
+            name: user.name ?? null,
+            id: user.id ?? 'impersonated-' + phone
+          };
+
+          const employeeSession = {
+            phone,
+            intent: null,
+            step: null,
+            data: {
+              selected_site: singleSite.id,
+              site_selection_shown: true,
+              is_admin_impersonation: true
+            },
+            updated_at: new Date()
+          };
+          
+          await this.employeeFlow.handleMessage(impersonatedUser, employeeSession, 'menu');
+        }, 1000);
+        
         return;
       }
 
@@ -309,7 +426,7 @@ First, select which site you want to work on:`;
         "Select the site where you are working:",
         "Select Site",
         [{
-          title: "Active Sites",
+          title: "Your Assigned Sites",
           rows: siteOptions
         }]
       );
@@ -408,7 +525,7 @@ First, select which site you want to work on:`;
           
         if (selectedSite.length === 0) {
           await whatsappService.sendTextMessage(phone, "Please select a valid site from the list:");
-          await this.showSiteSelection(phone);
+          await this.showSiteSelection(phone, user);
           return;
         }
         
@@ -417,7 +534,7 @@ First, select which site you want to work on:`;
       } catch (error) {
         console.error('Error validating site selection:', error);
         await whatsappService.sendTextMessage(phone, "Error validating site selection. Please try again:");
-        await this.showSiteSelection(phone);
+        await this.showSiteSelection(phone, user);
         return;
       }
 

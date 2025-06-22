@@ -49,10 +49,21 @@ export class EmployeeFlowOrchestrator {
       // Handle authentication first
       if (!user.is_verified && !session?.data?.is_admin_impersonation) {
         console.log('👷‍♂️ [EMPLOYEE-ORCHESTRATOR] User not verified, routing to auth');
-        await this.authService.handleAuthentication(user, phone, messageText);
+        const authResult = await this.authService.handleVerification(user, phone, messageText);
+        if (!authResult.verified) {
+          return; // Stay in auth flow
+        }
+        // If verified, continue with normal flow
+      }
+
+      // For admin impersonation, use the passed session directly
+      if (session?.data?.is_admin_impersonation) {
+        console.log('👷‍♂️ [EMPLOYEE-ORCHESTRATOR] Admin impersonation mode - using passed session');
+        await this.handleAdminImpersonation(user, session, messageText, interactiveData, imageData);
         return;
       }
 
+      // For regular employee flow, use SessionManager
       // Route based on active flow
       if (session?.intent) {
         await this.handleActiveFlow(user, session, messageText, interactiveData, imageData);
@@ -65,6 +76,107 @@ export class EmployeeFlowOrchestrator {
         "❌ માફ કરશો, કોઈ ભૂલ થઈ છે. કૃપા કરીને ફરીથી પ્રયાસ કરો."
       );
     }
+  }
+
+  /**
+   * Handle admin impersonation mode
+   */
+  private async handleAdminImpersonation(
+    user: any,
+    session: any,
+    messageText: string,
+    interactiveData?: any,
+    imageData?: ImageMessage
+  ): Promise<void> {
+    const phone = user.phone;
+    
+    console.log('👷‍♂️ [EMPLOYEE-ORCHESTRATOR] Admin impersonation - session data:', {
+      intent: session?.intent,
+      step: session?.step,
+      selected_site: session?.data?.selected_site,
+      site_selection_shown: session?.data?.site_selection_shown
+    });
+
+    // Ensure site context is set if we have site data
+    if (session?.data?.selected_site) {
+      // Set site context in our internal state for workflows that need it
+      await this.siteService.setSiteContext(phone, session.data.selected_site);
+    }
+
+    // Route based on active flow or initial message
+    if (session?.intent && session.intent !== 'impersonate_employee') {
+      // We have an active employee flow within admin impersonation
+      await this.handleActiveFlowForAdmin(user, session, messageText, interactiveData, imageData);
+    } else {
+      // No active employee flow, handle as initial message
+      await this.handleInitialMessageForAdmin(user, phone, messageText, interactiveData, session);
+    }
+  }
+
+  /**
+   * Handle active flows for admin impersonation
+   */
+  private async handleActiveFlowForAdmin(
+    user: any,
+    session: any,
+    messageText: string,
+    interactiveData?: any,
+    imageData?: ImageMessage
+  ): Promise<void> {
+    const phone = user.phone;
+    
+    console.log('👷‍♂️ [EMPLOYEE-ORCHESTRATOR] Handling active flow for admin:', session.intent);
+
+    switch (session.intent) {
+      case 'activity_logging':
+        await this.activityService.handleFlowStep(user, phone, messageText, interactiveData, imageData);
+        break;
+
+      case 'material_request':
+        await this.materialService.handleFlowStep(user, phone, messageText, interactiveData, imageData);
+        break;
+
+      case 'inventory_management_gujarati':
+        await this.inventoryService.handleFlowStep(user, phone, messageText, interactiveData, imageData);
+        break;
+
+      default:
+        console.log('👷‍♂️ [EMPLOYEE-ORCHESTRATOR] Unknown flow intent for admin:', session.intent);
+        await this.showMainMenu(user, phone);
+        break;
+    }
+  }
+
+  /**
+   * Handle initial message for admin impersonation
+   */
+  private async handleInitialMessageForAdmin(
+    user: any,
+    phone: string,
+    messageText: string,
+    interactiveData?: any,
+    session?: any
+  ): Promise<void> {
+    const text = messageText.toLowerCase().trim();
+
+    // Quick commands
+    if (text === 'menu' || text === 'મેનુ') {
+      await this.showMainMenu(user, phone);
+      return;
+    }
+
+    // Site should already be selected in admin impersonation mode
+    // If not, there's an issue with the admin flow setup
+    if (!session?.data?.selected_site) {
+      console.error('👷‍♂️ [EMPLOYEE-ORCHESTRATOR] Admin impersonation without site selection');
+      await whatsappService.sendTextMessage(phone, 
+        "❌ Site not selected properly. Please exit and restart employee impersonation."
+      );
+      return;
+    }
+
+    // Handle main menu selection directly
+    await this.handleMainMenuSelection(user, phone, messageText, interactiveData);
   }
 
   /**
@@ -126,12 +238,21 @@ export class EmployeeFlowOrchestrator {
       return;
     }
 
-    // Handle site selection if needed
+    // Handle site selection if needed (for regular employee flow)
     const needsSiteSelection = await this.siteService.needsSiteSelection(user, phone);
     if (needsSiteSelection) {
+      // Store the original intent before site selection
+      const originalIntent = this.extractSelectionIntent(messageText, interactiveData);
+      
       const siteSelectionComplete = await this.siteService.handleSiteSelection(user, phone, messageText);
       if (!siteSelectionComplete) {
-        await this.showMainMenu(user, phone);
+        // Site selection complete, now continue with original intent
+        if (originalIntent) {
+          console.log('👷‍♂️ [EMPLOYEE-ORCHESTRATOR] Continuing with original intent after site selection:', originalIntent);
+          await this.handleMainMenuSelection(user, phone, originalIntent, interactiveData);
+        } else {
+          await this.showMainMenu(user, phone);
+        }
       }
       return;
     }
@@ -175,6 +296,36 @@ export class EmployeeFlowOrchestrator {
         }]
       );
     }, 1000);
+  }
+
+  /**
+   * Extract the original selection intent from message text or interactive data
+   */
+  private extractSelectionIntent(messageText: string, interactiveData?: any): string | null {
+    // Extract selection from interactive data or text
+    if (interactiveData && interactiveData.type === 'button_reply' && interactiveData.button_reply) {
+      return interactiveData.button_reply.id;
+    } else if (interactiveData && interactiveData.type === 'list_reply' && interactiveData.list_reply) {
+      return interactiveData.list_reply.id;
+    }
+    
+    // Check if messageText matches known selections
+    const text = messageText.toLowerCase().trim();
+    
+    // Map various inputs to standard selections
+    if (text === 'inventory_gujarati' || text === 'ઇન્વેન્ટરી' || text === '3') {
+      return 'inventory_gujarati';
+    } else if (text === 'activity_logging' || text === 'કામની નોંધ' || text === '1') {
+      return 'activity_logging';
+    } else if (text === 'material_request' || text === 'સામગ્રીની માંગ' || text === '2') {
+      return 'material_request';
+    } else if (text === 'dashboard' || text === 'ડેશબોર્ડ') {
+      return 'dashboard';
+    } else if (text === 'help' || text === 'મદદ') {
+      return 'help';
+    }
+    
+    return null;
   }
 
   /**

@@ -144,9 +144,9 @@ export class MessageHandler {
       if (!user) {
         console.log('⚠️ [HANDLER] Using temporary user (DB unavailable)');
         user = {
-          id: 'temp-' + normalizedPhone,
+          id: null,
           phone: normalizedPhone,
-          role: 'customer' as 'customer' | 'employee' | 'admin',
+          role: 'customer' as const,
           name: null,
           email: null,
           is_verified: false,
@@ -154,8 +154,7 @@ export class MessageHandler {
           created_at: new Date(),
           updated_at: new Date(),
           introduction_sent: false,
-          introduction_sent_at: null,
-          details: null
+          introduction_sent_at: null
         };
       }
       // Null check before using user.role

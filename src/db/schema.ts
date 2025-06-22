@@ -50,7 +50,6 @@ export const sites = pgTable("sites", {
   status: text("status", { 
     enum: ["planning", "active", "completed", "on_hold"] 
   }).default("planning"),
-  manager_id: uuid("manager_id").references(() => users.id),
   image_url: text("image_url"), // Site image/logo
   image_key: text("image_key"), // R2 object key for management
   details: jsonb("details"),
