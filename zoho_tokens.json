@@ -1,8 +1,8 @@
 {
   "authorization_code": "1000.9a7cd6d176373bea71caf0d3d849ba77.1455d77de695ecf0f86479ec21aa6917",
-  "access_token": "1000.f3aff8649da8a52e5e8ceac110482c18.b51fb0483db976dfb721d3a968dd5935",
+  "access_token": "1000.cb2b61dd876ac159a0a7d514ff5ecafb.d11dc220b08c1a05660e9dd8dbb63e5e",
   "refresh_token": "1000.347444c5e28ee9c295e7ec1dd65a8e06.2ed699a65ac444076b9c92d636e93b94",
-  "expires_at": "2025-06-16T19:36:54.780Z",
+  "expires_at": "2025-07-02T19:56:03.231Z",
   "token_type": "Bearer",
   "scope": "ZohoMail.messages.ALL ZohoMail.accounts.READ",
   "created_at": "2025-06-16T18:21:16.075Z"

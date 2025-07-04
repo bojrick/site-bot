@@ -1,9 +1,14 @@
 import express from 'express';
 import { EmployeeService } from '../services/employeeService';
 import { introductionService } from '../services/introductionService';
+import { WhatsAppService } from '../services/whatsapp';
+import { getDb } from '../db';
+import { message_logs } from '../db/schema';
+import { desc } from 'drizzle-orm';
 
 const router = express.Router();
 const employeeService = new EmployeeService();
+const whatsappService = new WhatsAppService();
 
 // Add single employee
 router.post('/employees', async (req, res) => {
@@ -210,6 +215,108 @@ router.delete('/employees/:phone/introduction', async (req, res) => {
     });
   } catch (error) {
     console.error('Error in reset introduction status route:', error);
+    return res.status(500).json({ 
+      success: false, 
+      message: 'Internal server error' 
+    });
+  }
+});
+
+// Send custom message to specific phone number
+router.post('/messages/send', async (req, res) => {
+  try {
+    const { phone, message, messageType = 'text' } = req.body;
+    
+    if (!phone || !message) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Phone number and message are required' 
+      });
+    }
+
+    // Send the WhatsApp message
+    const messageSent = await whatsappService.sendTextMessage(phone, message);
+    
+    if (messageSent) {
+      // Log the outbound message
+      try {
+        await getDb().insert(message_logs).values({
+          phone,
+          direction: 'outbound',
+          message_type: messageType,
+          content: message,
+          metadata: {
+            sent_via: 'admin_panel',
+            timestamp: new Date().toISOString()
+          }
+        });
+      } catch (dbError) {
+        console.error('Error logging message to database:', dbError);
+        // Continue even if logging fails
+      }
+      
+      return res.json({
+        success: true,
+        message: 'Message sent successfully'
+      });
+    } else {
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to send message'
+      });
+    }
+  } catch (error) {
+    console.error('Error in send custom message route:', error);
+    return res.status(500).json({ 
+      success: false, 
+      message: 'Internal server error' 
+    });
+  }
+});
+
+// Get message logs grouped by phone number
+router.get('/messages/conversations', async (req, res) => {
+  try {
+    const data = await getDb()
+      .select()
+      .from(message_logs)
+      .orderBy(desc(message_logs.created_at));
+
+    // Group messages by phone number
+    const conversations = (data || []).reduce((acc: any, message: any) => {
+      if (!acc[message.phone]) {
+        acc[message.phone] = {
+          phone: message.phone,
+          messages: [],
+          lastMessage: null,
+          totalMessages: 0
+        };
+      }
+      
+      acc[message.phone].messages.push(message);
+      acc[message.phone].totalMessages++;
+      
+      // Update last message (most recent due to desc order)
+      if (!acc[message.phone].lastMessage || 
+          new Date(message.created_at) > new Date(acc[message.phone].lastMessage.created_at)) {
+        acc[message.phone].lastMessage = message;
+      }
+      
+      return acc;
+    }, {});
+
+    // Convert to array and sort by last message time
+    const conversationList = Object.values(conversations).sort((a: any, b: any) => {
+      return new Date(b.lastMessage?.created_at || 0).getTime() - 
+             new Date(a.lastMessage?.created_at || 0).getTime();
+    });
+
+    return res.json({
+      success: true,
+      conversations: conversationList
+    });
+  } catch (error) {
+    console.error('Error in get conversations route:', error);
     return res.status(500).json({ 
       success: false, 
       message: 'Internal server error' 
